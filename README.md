@@ -8,8 +8,8 @@
 | **Architecture** | x86_64 (the arm64 route is identical, with one substitution) |
 | **Upstream package** | `claude-desktop_amd64.deb`, Anthropic's official Linux beta |
 | **Support status** | Unsupported by Anthropic on Fedora. This is a community procedure. |
-| **Author** | NeumannTechTips |
-| **Last validated** | 8 August 2026 |
+| **Author** | Neumann |
+| **Last validated** | 8 August 2026, end to end on real hardware, download through sign-in |
 
 ---
 
@@ -192,6 +192,49 @@ Sign in with your Anthropic account. Chat is available on every plan including F
 
 ---
 
+## Native Wayland sessions: one additional flag
+
+Fedora's KDE spin defaults to a native Wayland session, and Claude Desktop's Chromium base has two known rough edges under native Wayland that do not appear under X11 or under XWayland. Neither is dangerous, but both are worth heading off before they look like a broken install.
+
+Test it directly first:
+
+```bash
+claude-desktop --ozone-platform=x11
+```
+
+If the welcome screen appears and you see:
+
+```
+ERROR:media/gpu/vaapi/vaapi_wrapper.cc: vaInitialize failed: unknown libva error
+```
+
+or a line mentioning `dri_gbm.so` and `Permission denied`, that is expected and covered below in Troubleshooting. Both are cosmetic. If the window opens, the flag works and the install is functioning correctly.
+
+Make it permanent without editing Anthropic's own desktop file, since that file is overwritten on every future update. Write a user-level override instead, which KDE's XDG lookup rules read ahead of the system one:
+
+```bash
+mkdir -p ~/.local/share/applications
+cp /usr/share/applications/com.anthropic.Claude.desktop ~/.local/share/applications/
+sed -i 's|^Exec=claude-desktop|Exec=claude-desktop --ozone-platform=x11|' ~/.local/share/applications/com.anthropic.Claude.desktop
+kbuildsycoca6
+```
+
+Confirm all three `Exec=` lines picked up the flag, the main entry plus the two quick actions:
+
+```bash
+grep ^Exec= ~/.local/share/applications/com.anthropic.Claude.desktop
+```
+
+You should see `--ozone-platform=x11` on every line. This makes the flag apply automatically from the application launcher and from Quick Entry, not only when launched by hand from a terminal.
+
+If you're on an X11 session rather than Wayland, or you're using XWayland, none of this is necessary. Check with:
+
+```bash
+echo $XDG_SESSION_TYPE
+```
+
+---
+
 ## Desktop integration extras
 
 Two optional packages fix issues that only appear on some setups.
@@ -224,6 +267,56 @@ sudo cp -av extracted/usr/. /usr/
 ```
 
 Then confirm the symlink exists at `/usr/bin/claude-desktop`.
+
+### `vaInitialize failed` on launch
+
+```
+ERROR:media/gpu/vaapi/vaapi_wrapper.cc:1658 vaInitialize failed: unknown libva error
+```
+
+Hardware video decode is unavailable, and Chromium falls back to software decoding automatically. This affects only embedded video playback inside the app, nothing else, and does not prevent the app from starting. Safe to ignore unless you specifically need hardware-accelerated video.
+
+### `dri_gbm.so: Permission denied` on launch, despite correct file permissions
+
+```
+MESA-LOADER: failed to open dri: /usr/lib64/gbm/dri_gbm.so: cannot open shared object file: Permission denied
+```
+
+This looks alarming because "Permission denied" usually means a Unix permissions or SELinux problem, and it is worth ruling both out properly rather than guessing, in this order:
+
+**1. Check the file itself.** It should already be correct, since this is a stock Fedora system library your install never touched:
+
+```bash
+ls -la /usr/lib64/gbm/dri_gbm.so
+```
+
+Expect `-rwxr-xr-x root root`, world-readable and world-executable. If that is what you see, standard Unix permissions are not the cause.
+
+**2. Check SELinux properly, not just with `getenforce`.** A denial can only be ruled out by actually finding no denial logged, which depends on `auditd` running:
+
+```bash
+systemctl is-active auditd
+sudo ausearch -m avc -ts recent
+```
+
+If `ausearch` returns `<no matches>` **and** `auditd` is active, that is a genuine negative, SELinux is not involved. If `auditd` is inactive, `ausearch` will report no matches regardless of what happened, so check the kernel ring buffer directly instead:
+
+```bash
+sudo dmesg | grep -i denied
+sudo journalctl -k -g denied
+```
+
+Empty results across all of these mean SELinux genuinely is not the cause, and no `restorecon` or policy change is needed.
+
+**3. The actual cause: Chromium's internal GPU sandbox, not the OS.** Independently of the setuid `chrome-sandbox` helper fixed during installation, Chromium's GPU process applies its own internal restriction on which library paths it will open. The package is built assuming Debian's multiarch layout (`/usr/lib/x86_64-linux-gnu/...`), and Fedora uses `/usr/lib64/...` instead. The library is present and its permissions are correct, but the sandboxed GPU process does not recognise that path as one it is allowed to touch, and reports the refusal back as a permission failure rather than a missing-file one.
+
+To confirm this specifically, as a one-off diagnostic only:
+
+```bash
+claude-desktop --ozone-platform=x11 --disable-gpu-sandbox
+```
+
+If the `dri_gbm.so` line disappears, that confirms the cause. **Do not leave this flag on permanently.** It disables a real security boundary around a process that renders remote content, for the sake of a cosmetic rendering path. The practical effect of the original error, with the flag left off, is that the app falls back to software rendering (`llvmpipe`). Chat, Cowork and Claude Code all function normally under software rendering; you lose GPU-accelerated compositing, nothing more.
 
 ### `Permission denied` when listing files under `/usr/lib/claude-desktop`
 
