@@ -8,7 +8,7 @@
 | **Architecture** | x86_64 (the arm64 route is identical, with one substitution) |
 | **Upstream package** | `claude-desktop_amd64.deb`, Anthropic's official Linux beta |
 | **Support status** | Unsupported by Anthropic on Fedora. This is a community procedure. |
-| **Author** | Neumann |
+| **Author** | NeumannTechTips |
 | **Last validated** | 8 August 2026 |
 
 ---
