@@ -1,0 +1,201 @@
+<mxfile host="app.diagrams.net" type="device">
+  <diagram id="claude-fedora-install" name="Install Reference Architecture">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1"
+                  connect="1" arrows="1" fold="1" page="1" pageScale="1"
+                  pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="title" value="Claude Desktop on Fedora 44 KDE &#8212; Manual Installation Reference Architecture" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=16;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1160" y="8" width="454" height="26" as="geometry"/></mxCell>
+        <mxCell id="band1" value="Upstream Distribution&#10;(Anthropic)" style="swimlane;horizontal=0;startSize=40;html=1;whiteSpace=wrap;rounded=0;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontSize=14;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="1080" height="130" as="geometry"/>
+        </mxCell>
+        <mxCell id="n1" value="APT Repository&#10;downloads.claude.ai" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6C8EBF;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" vertex="1" parent="band1">
+          <mxGeometry x="80" y="35" width="240" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="n2" value="Package Pool Index&#10;signed Packages file" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6C8EBF;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" vertex="1" parent="band1">
+          <mxGeometry x="380" y="35" width="240" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="n3" value="Detached Signing Key&#10;key.asc" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6C8EBF;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" vertex="1" parent="band1">
+          <mxGeometry x="680" y="35" width="240" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="band2" value="Acquisition and&#10;Integrity Verification" style="swimlane;horizontal=0;startSize=40;html=1;whiteSpace=wrap;rounded=0;fillColor=#D5E8D4;strokeColor=#82B366;fontSize=14;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="40" y="210" width="1080" height="130" as="geometry"/>
+        </mxCell>
+        <mxCell id="n4" value="Package Download&#10;claude-desktop_amd64.deb" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82B366;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" vertex="1" parent="band2">
+          <mxGeometry x="80" y="35" width="240" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="n5" value="SHA-256 Comparison&#10;against published digest" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82B366;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" vertex="1" parent="band2">
+          <mxGeometry x="380" y="35" width="240" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="n6" value="Key Fingerprint Check&#10;31DD DE24 ... 1A7E CACE" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82B366;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" vertex="1" parent="band2">
+          <mxGeometry x="680" y="35" width="240" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="band3" value="Staging and Extraction" style="swimlane;horizontal=0;startSize=40;html=1;whiteSpace=wrap;rounded=0;fillColor=#FFF2CC;strokeColor=#D6B656;fontSize=14;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="40" y="380" width="1080" height="130" as="geometry"/>
+        </mxCell>
+        <mxCell id="n7" value="Archive Extraction&#10;sudo dpkg-deb -x" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D6B656;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" vertex="1" parent="band3">
+          <mxGeometry x="80" y="35" width="240" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="n8" value="Staging Tree&#10;extracted/usr" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D6B656;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" vertex="1" parent="band3">
+          <mxGeometry x="380" y="35" width="240" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="n9" value="Install Manifest&#10;files and symlinks recorded" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D6B656;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" vertex="1" parent="band3">
+          <mxGeometry x="680" y="35" width="240" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="band4" value="Target Filesystem (/usr)" style="swimlane;horizontal=0;startSize=40;html=1;whiteSpace=wrap;rounded=0;fillColor=#E1D5E7;strokeColor=#9673A6;fontSize=14;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="40" y="550" width="1080" height="130" as="geometry"/>
+        </mxCell>
+        <mxCell id="n10" value="/usr/lib/claude-desktop&#10;Electron runtime payload" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9673A6;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" vertex="1" parent="band4">
+          <mxGeometry x="80" y="35" width="240" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="n11" value="/usr/bin/claude-desktop&#10;symlink on system PATH" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9673A6;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" vertex="1" parent="band4">
+          <mxGeometry x="380" y="35" width="240" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="n12" value="/usr/share&#10;desktop entry and icons" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9673A6;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" vertex="1" parent="band4">
+          <mxGeometry x="680" y="35" width="240" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="band5" value="Hardening and&#10;Desktop Integration" style="swimlane;horizontal=0;startSize=40;html=1;whiteSpace=wrap;rounded=0;fillColor=#F8CECC;strokeColor=#B85450;fontSize=14;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="40" y="720" width="1080" height="130" as="geometry"/>
+        </mxCell>
+        <mxCell id="n13" value="chrome-sandbox&#10;setuid root, mode 4755" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B85450;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" vertex="1" parent="band5">
+          <mxGeometry x="80" y="35" width="240" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="n14" value="Command Resolution&#10;/usr/bin already on PATH" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B85450;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" vertex="1" parent="band5">
+          <mxGeometry x="380" y="35" width="240" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="n15" value="Plasma Menu Cache&#10;kbuildsycoca6 rebuild" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B85450;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" vertex="1" parent="band5">
+          <mxGeometry x="680" y="35" width="240" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="band6" value="Lifecycle and&#10;Control Plane" style="swimlane;horizontal=0;startSize=40;html=1;whiteSpace=wrap;rounded=0;fillColor=#F5F5F5;strokeColor=#666666;fontSize=14;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="40" y="890" width="1080" height="130" as="geometry"/>
+        </mxCell>
+        <mxCell id="n16" value="Manual Update Cycle&#10;no auto-update on Linux" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" vertex="1" parent="band6">
+          <mxGeometry x="80" y="35" width="240" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="n17" value="Runtime Verification&#10;launch and sign-in" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" vertex="1" parent="band6">
+          <mxGeometry x="380" y="35" width="240" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="n18" value="Manifest-Driven Removal&#10;no dnf ownership" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" vertex="1" parent="band6">
+          <mxGeometry x="680" y="35" width="240" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="eF1" value="F1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jumpStyle=arc;jumpSize=10;html=1;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;strokeColor=#6C8EBF;dashed=0;" edge="1" parent="1" source="n1" target="n4">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="eF2" value="F2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jumpStyle=arc;jumpSize=10;html=1;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;strokeColor=#6C8EBF;dashed=1;dashPattern=1 4;" edge="1" parent="1" source="n2" target="n5">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="eF3" value="F3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jumpStyle=arc;jumpSize=10;html=1;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;strokeColor=#6C8EBF;dashed=0;" edge="1" parent="1" source="n3" target="n6">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="eF4" value="F4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jumpStyle=arc;jumpSize=10;html=1;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;strokeColor=#82B366;dashed=1;dashPattern=1 4;" edge="1" parent="1" source="n4" target="n7">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="eF5" value="F5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jumpStyle=arc;jumpSize=10;html=1;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;strokeColor=#82B366;dashed=0;" edge="1" parent="1" source="n5" target="n8">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="eF6" value="F6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jumpStyle=arc;jumpSize=10;html=1;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;dashed=1;dashPattern=8 8;strokeColor=#666666;" edge="1" parent="1" source="n6" target="n9">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="eF7" value="F7" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jumpStyle=arc;jumpSize=10;html=1;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;strokeColor=#D6B656;dashed=1;dashPattern=1 4;" edge="1" parent="1" source="n7" target="n10">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="eF8" value="F8" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jumpStyle=arc;jumpSize=10;html=1;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;strokeColor=#D6B656;dashed=0;" edge="1" parent="1" source="n8" target="n11">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="eF9" value="F9" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jumpStyle=arc;jumpSize=10;html=1;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;strokeColor=#D6B656;dashed=1;dashPattern=1 4;" edge="1" parent="1" source="n9" target="n12">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="eF10" value="F10" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jumpStyle=arc;jumpSize=10;html=1;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;strokeColor=#9673A6;dashed=0;" edge="1" parent="1" source="n10" target="n13">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="eF11" value="F11" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jumpStyle=arc;jumpSize=10;html=1;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;strokeColor=#9673A6;dashed=0;" edge="1" parent="1" source="n11" target="n14">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="eF12" value="F12" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jumpStyle=arc;jumpSize=10;html=1;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;strokeColor=#9673A6;dashed=0;" edge="1" parent="1" source="n12" target="n15">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="eF13" value="F13" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jumpStyle=arc;jumpSize=10;html=1;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;dashed=1;dashPattern=8 8;strokeColor=#666666;" edge="1" parent="1" source="n13" target="n16">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="eF14" value="F14" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jumpStyle=arc;jumpSize=10;html=1;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;strokeColor=#B85450;dashed=0;" edge="1" parent="1" source="n14" target="n17">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="eF15" value="F15" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jumpStyle=arc;jumpSize=10;html=1;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;dashed=1;dashPattern=8 8;strokeColor=#666666;" edge="1" parent="1" source="n15" target="n18">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="keybox" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;verticalAlign=top;" vertex="1" parent="1"><mxGeometry x="1160" y="40" width="454" height="180" as="geometry"/></mxCell>
+        <mxCell id="keytitle" value="Key &#8212; connector vocabulary" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=13;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1175" y="50" width="424" height="24" as="geometry"/></mxCell>
+        <mxCell id="k82" value="&#8212;&#8212;&#8212;&#8212;" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1175" y="82" width="70" height="24" as="geometry"/></mxCell>
+        <mxCell id="km82" value="Solid: synchronous request and response" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1251" y="82" width="348" height="24" as="geometry"/></mxCell>
+        <mxCell id="k108" value="&#183; &#183; &#183; &#183;" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1175" y="108" width="70" height="24" as="geometry"/></mxCell>
+        <mxCell id="km108" value="Dotted: bulk or file transfer" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1251" y="108" width="348" height="24" as="geometry"/></mxCell>
+        <mxCell id="k134" value="&#8211; &#8211; &#8211;" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1175" y="134" width="70" height="24" as="geometry"/></mxCell>
+        <mxCell id="km134" value="Grey dashed: control, security, metadata" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1251" y="134" width="348" height="24" as="geometry"/></mxCell>
+        <mxCell id="k160" value="Colour" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1175" y="160" width="70" height="24" as="geometry"/></mxCell>
+        <mxCell id="km160" value="Matches the stroke of the source layer" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1251" y="160" width="348" height="24" as="geometry"/></mxCell>
+        <mxCell id="flowbox" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;verticalAlign=top;" vertex="1" parent="1"><mxGeometry x="1160" y="250" width="454" height="490" as="geometry"/></mxCell>
+        <mxCell id="flowtitle" value="Flow reference" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=13;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1175" y="260" width="424" height="24" as="geometry"/></mxCell>
+        <mxCell id="fh0" value="Ref" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1175" y="288" width="34" height="22" as="geometry"/></mxCell>
+        <mxCell id="fh1" value="Source to target" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1213" y="288" width="182" height="22" as="geometry"/></mxCell>
+        <mxCell id="fh2" value="Mechanism and cadence" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1399" y="288" width="200" height="22" as="geometry"/></mxCell>
+        <mxCell id="ftF1c0" value="F1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1175" y="312" width="34" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF1c1" value="Repository to download" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1213" y="312" width="182" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF1c2" value="HTTPS/TLS, on demand" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1399" y="312" width="200" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF2c0" value="F2" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1175" y="339" width="34" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF2c1" value="Pool index to comparison" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1213" y="339" width="182" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF2c2" value="File transfer, per release" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1399" y="339" width="200" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF3c0" value="F3" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1175" y="366" width="34" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF3c1" value="Key to fingerprint check" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1213" y="366" width="182" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF3c2" value="HTTPS/TLS, on demand" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1399" y="366" width="200" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF4c0" value="F4" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1175" y="393" width="34" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF4c1" value="Download to extraction" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1213" y="393" width="182" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF4c2" value="Local archive read, one pass" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1399" y="393" width="200" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF5c0" value="F5" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1175" y="420" width="34" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF5c1" value="Comparison to staging" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1213" y="420" width="182" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF5c2" value="Gate, blocks on mismatch" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1399" y="420" width="200" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF6c0" value="F6" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1175" y="447" width="34" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF6c1" value="Fingerprint to manifest" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1213" y="447" width="182" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF6c2" value="Control, provenance record" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1399" y="447" width="200" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF7c0" value="F7" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1175" y="474" width="34" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF7c1" value="Extraction to runtime" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1213" y="474" width="182" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF7c2" value="Bulk copy, mode preserved" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1399" y="474" width="200" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF8c0" value="F8" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1175" y="501" width="34" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF8c1" value="Staging to PATH symlink" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1213" y="501" width="182" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF8c2" value="Symlink creation, one pass" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1399" y="501" width="200" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF9c0" value="F9" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1175" y="528" width="34" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF9c1" value="Manifest to /usr/share" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1213" y="528" width="182" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF9c2" value="File transfer, per release" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1399" y="528" width="200" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF10c0" value="F10" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1175" y="555" width="34" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF10c1" value="Runtime to sandbox" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1213" y="555" width="182" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF10c2" value="Permission fix, post-copy" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1399" y="555" width="200" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF11c0" value="F11" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1175" y="582" width="34" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF11c1" value="Symlink to resolution" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1213" y="582" width="182" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF11c2" value="Shell lookup, every launch" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1399" y="582" width="200" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF12c0" value="F12" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1175" y="609" width="34" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF12c1" value="Assets to menu cache" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1213" y="609" width="182" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF12c2" value="Cache rebuild, post-install" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1399" y="609" width="200" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF13c0" value="F13" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1175" y="636" width="34" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF13c1" value="Sandbox to update cycle" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1213" y="636" width="182" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF13c2" value="Control, re-applied each update" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1399" y="636" width="200" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF14c0" value="F14" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1175" y="663" width="34" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF14c1" value="Resolution to launch" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1213" y="663" width="182" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF14c2" value="Process start, on demand" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1399" y="663" width="200" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF15c0" value="F15" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1175" y="690" width="34" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF15c1" value="Menu cache to removal" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1213" y="690" width="182" height="26" as="geometry"/></mxCell>
+        <mxCell id="ftF15c2" value="Control, manifest-driven" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1399" y="690" width="200" height="26" as="geometry"/></mxCell>
+        <mxCell id="verbox" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#666666;verticalAlign=top;" vertex="1" parent="1"><mxGeometry x="1160" y="770" width="454" height="270" as="geometry"/></mxCell>
+        <mxCell id="vertitle" value="Version, owner and viewpoint" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=13;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1175" y="780" width="424" height="24" as="geometry"/></mxCell>
+        <mxCell id="v0" value="&lt;b&gt;Version&lt;/b&gt; v1.0" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1175" y="810" width="424" height="24" as="geometry"/></mxCell>
+        <mxCell id="v1" value="&lt;b&gt;Status&lt;/b&gt; Published" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1175" y="835" width="424" height="24" as="geometry"/></mxCell>
+        <mxCell id="v2" value="&lt;b&gt;Owner&lt;/b&gt; Neumann" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1175" y="860" width="424" height="24" as="geometry"/></mxCell>
+        <mxCell id="v3" value="&lt;b&gt;Date&lt;/b&gt; 2026-08-08" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1175" y="885" width="424" height="24" as="geometry"/></mxCell>
+        <mxCell id="v4" value="&lt;b&gt;Viewpoint&lt;/b&gt; Logical build and install view of a" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1175" y="910" width="424" height="24" as="geometry"/></mxCell>
+        <mxCell id="v5" value="manual package installation on Fedora 44 KDE." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1175" y="935" width="424" height="24" as="geometry"/></mxCell>
+        <mxCell id="v6" value="&lt;b&gt;Out of scope&lt;/b&gt; Application internals, account" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1175" y="960" width="424" height="24" as="geometry"/></mxCell>
+        <mxCell id="v7" value="authentication, network topology, and the supported" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1175" y="985" width="424" height="24" as="geometry"/></mxCell>
+        <mxCell id="v8" value="apt installation path on Debian and Ubuntu." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" vertex="1" parent="1"><mxGeometry x="1175" y="1010" width="424" height="24" as="geometry"/></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
