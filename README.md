@@ -8,7 +8,7 @@
 | **Architecture** | x86_64 (the arm64 route is identical, with one substitution) |
 | **Upstream package** | `claude-desktop_amd64.deb`, Anthropic's official Linux beta |
 | **Support status** | Unsupported by Anthropic on Fedora. This is a community procedure. |
-| **Author** | NeumannTechTips |
+| **Author** | Neumann |
 | **Last validated** | 8 August 2026, end to end on real hardware, download through sign-in |
 
 ---
@@ -414,11 +414,19 @@ On top of those, this installation method adds two of its own. You lose automati
 
 ## Reference architecture
 
-`claude-desktop-fedora-install-architecture.drawio` accompanies this guide. It is a Type 1 static architecture view of the installation, structured across six layers: upstream distribution, acquisition and integrity verification, staging and extraction, target filesystem, hardening and desktop integration, and the lifecycle control plane.
+![Reference architecture for the manual installation of Claude Desktop on Fedora 44 KDE, showing six layers from upstream distribution through to the lifecycle control plane](claude-desktop-fedora-install-architecture.png)
+
+A Type 1 board-pack view of the installation, built for print and for reading on paper rather than on screen. It runs across six layers: upstream distribution, acquisition and integrity verification, staging and extraction, target filesystem, hardening and desktop integration, and the lifecycle control plane. Layer membership is carried by row position and the caption chips down the left edge, with no swimlane containers, so the structure survives being exported flat into a slide or a PDF.
 
 Connector line style carries the interaction pattern. Solid lines are synchronous, dotted lines are bulk or file transfer, and grey dashed lines are the control plane. Each connector carries a reference from F1 to F15, resolved in the flow-reference table on the diagram itself.
 
-Open it in [diagrams.net](https://app.diagrams.net), the draw.io desktop application, or the VS Code extension. Export to PNG or PDF for printing.
+Three formats are provided. The `.png` above is the rendered view. A scalable `.svg` is included for printing or embedding at any size. The editable `.drawio` source opens in [diagrams.net](https://app.diagrams.net), the draw.io desktop application, or the VS Code extension.
+
+| File | Use |
+|---|---|
+| `claude-desktop-fedora-install-architecture.png` | Viewing, and the version embedded above |
+| `claude-desktop-fedora-install-architecture.svg` | Printing and scaling without quality loss |
+| `claude-desktop-fedora-install-architecture.drawio` | Editing the diagram |
 
 ---
 
