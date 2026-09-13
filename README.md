@@ -443,3 +443,16 @@ Three formats are provided. The `.png` above is the rendered view. A scalable `.
 Fedora is not a supported platform for Claude Desktop. This procedure installs an official, unmodified Anthropic package by hand and is offered as a community contribution. It carries no warranty, and it is not endorsed by Anthropic. Verify the package before installing it, and keep the manifest so you can reverse the installation cleanly.
 
 Anthropic's documentation states that support for additional distributions is planned. When a native RPM arrives, migrate to it and remove this installation using the steps above.
+
+This is general information rather than professional advice, and the views here are the author's own rather than those of any employer or client. The procedure runs commands with elevated privileges, installs a setuid binary and writes into system paths. Read every command before you run it, and do not run it first on a machine you cannot afford to rebuild.
+
+Full version: [DISCLAIMER.md](https://github.com/NeumannTechTips/neumanntechtips-resources/blob/main/DISCLAIMER.md)
+
+---
+
+## More from NeumannTechTips
+
+This guide comes out of the work behind **[NeumannTechTips](https://www.youtube.com/@NeumannTechTips)**, a channel on practical AI for people who have to make it work inside a real organisation.
+
+- 📺 **[youtube.com/@NeumannTechTips](https://www.youtube.com/@NeumannTechTips)** · a new video every other Thursday
+- 📚 **[neumanntechtips-resources](https://github.com/NeumannTechTips/neumanntechtips-resources)** · free prompt packs and checklists, licensed CC BY 4.0, no sign up
