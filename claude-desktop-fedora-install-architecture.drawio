@@ -1,10 +1,10 @@
 <mxfile host="app.diagrams.net">
   <diagram id="claude-fedora-install-boardpack" name="Install Reference Architecture">
-    <mxGraphModel dx="1995" dy="817" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1101" dy="1056" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1240" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="title" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=17;fontStyle=1;fontFamily=Helvetica;" value="Claude Desktop on Fedora 44 KDE: Manual Installation Reference Architecture" vertex="1">
+        <mxCell id="title" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=17;fontStyle=1;fontFamily=Helvetica;" value="Claude Desktop on Fedora 45 KDE Plasma: Manual Installation Reference Architecture" vertex="1">
           <mxGeometry height="28" width="1100" x="40" y="38" as="geometry" />
         </mxCell>
         <mxCell id="cap0" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontSize=13;fontStyle=1;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=12;" value="1. Upstream Distribution&#xa;(Anthropic)" vertex="1">
@@ -13,7 +13,7 @@
         <mxCell id="n1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6C8EBF;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="APT Repository&#xa;downloads.claude.ai" vertex="1">
           <mxGeometry height="60" width="240" x="280" y="112" as="geometry" />
         </mxCell>
-        <mxCell id="n2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6C8EBF;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="Package Pool Index&#xa;signed Packages file" vertex="1">
+        <mxCell id="n2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6C8EBF;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="Signed Repository Index&#xa;InRelease and Packages" vertex="1">
           <mxGeometry height="60" width="240" x="580" y="112" as="geometry" />
         </mxCell>
         <mxCell id="n3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6C8EBF;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="Detached Signing Key&#xa;key.asc" vertex="1">
@@ -22,7 +22,7 @@
         <mxCell id="cap1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;fontSize=13;fontStyle=1;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=12;" value="2. Acquisition and&#xa;Integrity Verification" vertex="1">
           <mxGeometry height="60" width="200" x="40" y="277" as="geometry" />
         </mxCell>
-        <mxCell id="n4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82B366;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="Package Download&#xa;claude-desktop_amd64.deb" vertex="1">
+        <mxCell id="n4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82B366;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="Package Download&#xa;newest version from the index" vertex="1">
           <mxGeometry height="60" width="240" x="280" y="277" as="geometry" />
         </mxCell>
         <mxCell id="n5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82B366;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="SHA-256 Comparison&#xa;against published digest" vertex="1">
@@ -37,10 +37,10 @@
         <mxCell id="n7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D6B656;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="Archive Extraction&#xa;sudo dpkg-deb -x" vertex="1">
           <mxGeometry height="60" width="240" x="280" y="442" as="geometry" />
         </mxCell>
-        <mxCell id="n8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D6B656;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="Staging Tree&#xa;extracted/usr" vertex="1">
+        <mxCell id="n8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D6B656;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="Fresh Staging Folder&#xa;/var/tmp, empty per release" vertex="1">
           <mxGeometry height="60" width="240" x="580" y="442" as="geometry" />
         </mxCell>
-        <mxCell id="n9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D6B656;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="Install Manifest&#xa;files and symlinks recorded" vertex="1">
+        <mxCell id="n9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D6B656;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="Install Manifest&#xa;one file per version, kept&#xa;in ~/.local/share" vertex="1">
           <mxGeometry height="60" width="240" x="880" y="442" as="geometry" />
         </mxCell>
         <mxCell id="cap3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E1D5E7;strokeColor=#9673A6;fontSize=13;fontStyle=1;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=12;" value="4. Target Filesystem (/usr)" vertex="1">
@@ -52,13 +52,13 @@
         <mxCell id="n11" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9673A6;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="/usr/bin/claude-desktop&#xa;symlink on system PATH" vertex="1">
           <mxGeometry height="60" width="240" x="580" y="607" as="geometry" />
         </mxCell>
-        <mxCell id="n12" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9673A6;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="/usr/share&#xa;desktop entry and icons" vertex="1">
+        <mxCell id="n12" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9673A6;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="/usr/share&#xa;desktop entry, icons, MIME types" vertex="1">
           <mxGeometry height="60" width="240" x="880" y="607" as="geometry" />
         </mxCell>
         <mxCell id="cap4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;fontSize=13;fontStyle=1;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=12;" value="5. Hardening and&#xa;Desktop Integration" vertex="1">
           <mxGeometry height="60" width="200" x="40" y="772" as="geometry" />
         </mxCell>
-        <mxCell id="n13" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B85450;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="chrome-sandbox&#xa;setuid root, mode 4755" vertex="1">
+        <mxCell id="n13" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B85450;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="chrome-sandbox&#xa;setuid root 4755, SELinux lib_t" vertex="1">
           <mxGeometry height="60" width="240" x="280" y="772" as="geometry" />
         </mxCell>
         <mxCell id="n14" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B85450;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="Command Resolution&#xa;/usr/bin already on PATH" vertex="1">
@@ -70,7 +70,7 @@
         <mxCell id="cap5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#666666;fontSize=13;fontStyle=1;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=12;" value="6. Lifecycle and&#xa;Control Plane" vertex="1">
           <mxGeometry height="60" width="200" x="40" y="937" as="geometry" />
         </mxCell>
-        <mxCell id="n16" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="Manual Update Cycle&#xa;no auto-update on Linux" vertex="1">
+        <mxCell id="n16" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="Move-Aside Update&#xa;rollback copy until verified" vertex="1">
           <mxGeometry height="60" width="240" x="280" y="937" as="geometry" />
         </mxCell>
         <mxCell id="n17" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="Runtime Verification&#xa;launch and sign-in" vertex="1">
@@ -78,6 +78,18 @@
         </mxCell>
         <mxCell id="n18" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="Manifest-Driven Removal&#xa;no dnf ownership" vertex="1">
           <mxGeometry height="60" width="240" x="880" y="937" as="geometry" />
+        </mxCell>
+        <mxCell id="cap6" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#B0E3E6;strokeColor=#0E8088;fontSize=13;fontStyle=1;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=12;" value="7. Cowork Virtualisation&#xa;(optional)" vertex="1">
+          <mxGeometry height="60" width="200" x="40" y="1102" as="geometry" />
+        </mxCell>
+        <mxCell id="n19" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0E8088;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="Requirement Check&#xa;KVM, kvm group, QEMU, firmware" vertex="1">
+          <mxGeometry height="60" width="240" x="280" y="1102" as="geometry" />
+        </mxCell>
+        <mxCell id="n20" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0E8088;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="QEMU/KVM Virtual Machine&#xa;qemu-system-x86-core, edk2-ovmf" vertex="1">
+          <mxGeometry height="60" width="240" x="580" y="1102" as="geometry" />
+        </mxCell>
+        <mxCell id="n21" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0E8088;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="Host-Guest Channels&#xa;vhost-vsock, bundled virtiofsd" vertex="1">
+          <mxGeometry height="60" width="240" x="880" y="1102" as="geometry" />
         </mxCell>
         <mxCell id="eF1" edge="1" parent="1" source="n1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jumpStyle=arc;jumpSize=10;html=1;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;strokeColor=#6C8EBF;dashed=0;" target="n4" value="F1">
           <mxGeometry relative="1" as="geometry" />
@@ -124,13 +136,22 @@
         <mxCell id="eF15" edge="1" parent="1" source="n15" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jumpStyle=arc;jumpSize=10;html=1;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;dashed=1;dashPattern=8 8;strokeColor=#666666;" target="n18" value="F15">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
+        <mxCell id="eF16" edge="1" parent="1" source="n17" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jumpStyle=arc;jumpSize=10;html=1;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;dashed=1;dashPattern=8 8;strokeColor=#666666;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="n19" value="F16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eF17" edge="1" parent="1" source="n19" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jumpStyle=arc;jumpSize=10;html=1;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;strokeColor=#0E8088;dashed=0;" target="n20" value="F17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eF18" edge="1" parent="1" source="n20" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jumpStyle=arc;jumpSize=10;html=1;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;strokeColor=#0E8088;dashed=1;dashPattern=1 4;" target="n21" value="F18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="keybox" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;verticalAlign=top;" value="" vertex="1">
           <mxGeometry height="176" width="434" x="1180" y="112" as="geometry" />
         </mxCell>
         <mxCell id="keytitle" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=13;fontStyle=1;fontFamily=Helvetica;" value="Key: connector vocabulary" vertex="1">
           <mxGeometry height="24" width="404" x="1195" y="122" as="geometry" />
         </mxCell>
-        <mxCell id="k154" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" value="————" vertex="1">
+        <mxCell id="k154" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" value="━━━━" vertex="1">
           <mxGeometry height="24" width="70" x="1195" y="154" as="geometry" />
         </mxCell>
         <mxCell id="km154" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" value="Solid: synchronous request and response" vertex="1">
@@ -155,7 +176,7 @@
           <mxGeometry height="24" width="328" x="1271" y="232" as="geometry" />
         </mxCell>
         <mxCell id="flowbox" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;verticalAlign=top;" value="" vertex="1">
-          <mxGeometry height="492" width="434" x="1180" y="318" as="geometry" />
+          <mxGeometry height="573" width="434" x="1180" y="318" as="geometry" />
         </mxCell>
         <mxCell id="flowtitle" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=13;fontStyle=1;fontFamily=Helvetica;" value="Flow reference" vertex="1">
           <mxGeometry height="24" width="404" x="1195" y="328" as="geometry" />
@@ -181,7 +202,7 @@
         <mxCell id="ftF2c0" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="F2" vertex="1">
           <mxGeometry height="26" width="34" x="1195" y="407" as="geometry" />
         </mxCell>
-        <mxCell id="ftF2c1" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Pool index to comparison" vertex="1">
+        <mxCell id="ftF2c1" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Signed index to comparison" vertex="1">
           <mxGeometry height="26" width="172" x="1233" y="407" as="geometry" />
         </mxCell>
         <mxCell id="ftF2c2" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="File transfer, per release" vertex="1">
@@ -229,7 +250,7 @@
         <mxCell id="ftF7c1" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Extraction to runtime" vertex="1">
           <mxGeometry height="26" width="172" x="1233" y="542" as="geometry" />
         </mxCell>
-        <mxCell id="ftF7c2" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Bulk copy, mode preserved" vertex="1">
+        <mxCell id="ftF7c2" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="tar copy, mode preserved" vertex="1">
           <mxGeometry height="26" width="190" x="1409" y="542" as="geometry" />
         </mxCell>
         <mxCell id="ftF8c0" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="F8" vertex="1">
@@ -256,7 +277,7 @@
         <mxCell id="ftF10c1" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Runtime to sandbox" vertex="1">
           <mxGeometry height="26" width="172" x="1233" y="623" as="geometry" />
         </mxCell>
-        <mxCell id="ftF10c2" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Permission fix, post-copy" vertex="1">
+        <mxCell id="ftF10c2" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Verified, relabelled post-copy" vertex="1">
           <mxGeometry height="26" width="190" x="1409" y="623" as="geometry" />
         </mxCell>
         <mxCell id="ftF11c0" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="F11" vertex="1">
@@ -283,7 +304,7 @@
         <mxCell id="ftF13c1" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Sandbox to update cycle" vertex="1">
           <mxGeometry height="26" width="172" x="1233" y="704" as="geometry" />
         </mxCell>
-        <mxCell id="ftF13c2" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Control, re-applied each update" vertex="1">
+        <mxCell id="ftF13c2" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Control, re-checked each update" vertex="1">
           <mxGeometry height="26" width="190" x="1409" y="704" as="geometry" />
         </mxCell>
         <mxCell id="ftF14c0" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="F14" vertex="1">
@@ -304,29 +325,56 @@
         <mxCell id="ftF15c2" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Control, manifest-driven" vertex="1">
           <mxGeometry height="26" width="190" x="1409" y="758" as="geometry" />
         </mxCell>
+        <mxCell id="ftF16c0" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="F16" vertex="1">
+          <mxGeometry height="26" width="34" x="1195" y="785" as="geometry" />
+        </mxCell>
+        <mxCell id="ftF16c1" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Launch to requirement check" vertex="1">
+          <mxGeometry height="26" width="172" x="1233" y="785" as="geometry" />
+        </mxCell>
+        <mxCell id="ftF16c2" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Control, probed once per launch" vertex="1">
+          <mxGeometry height="26" width="190" x="1409" y="785" as="geometry" />
+        </mxCell>
+        <mxCell id="ftF17c0" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="F17" vertex="1">
+          <mxGeometry height="26" width="34" x="1195" y="812" as="geometry" />
+        </mxCell>
+        <mxCell id="ftF17c1" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Requirement check to VM" vertex="1">
+          <mxGeometry height="26" width="172" x="1233" y="812" as="geometry" />
+        </mxCell>
+        <mxCell id="ftF17c2" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Process start, on pass" vertex="1">
+          <mxGeometry height="26" width="190" x="1409" y="812" as="geometry" />
+        </mxCell>
+        <mxCell id="ftF18c0" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="F18" vertex="1">
+          <mxGeometry height="26" width="34" x="1195" y="839" as="geometry" />
+        </mxCell>
+        <mxCell id="ftF18c1" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="VM to host channels" vertex="1">
+          <mxGeometry height="26" width="172" x="1233" y="839" as="geometry" />
+        </mxCell>
+        <mxCell id="ftF18c2" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="File sharing, per session" vertex="1">
+          <mxGeometry height="26" width="190" x="1409" y="839" as="geometry" />
+        </mxCell>
         <mxCell id="verbox" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#666666;verticalAlign=top;" value="" vertex="1">
-          <mxGeometry height="220" width="434" x="1180" y="840" as="geometry" />
+          <mxGeometry height="220" width="434" x="1180" y="921" as="geometry" />
         </mxCell>
         <mxCell id="vertitle" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=13;fontStyle=1;fontFamily=Helvetica;" value="Version, owner and viewpoint" vertex="1">
-          <mxGeometry height="24" width="404" x="1195" y="850" as="geometry" />
+          <mxGeometry height="24" width="404" x="1195" y="931" as="geometry" />
         </mxCell>
-        <mxCell id="v0" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" value="&lt;b&gt;Version&lt;/b&gt; v2.0" vertex="1">
-          <mxGeometry height="24" width="404" x="1195" y="880" as="geometry" />
+        <mxCell id="v0" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" value="&lt;b&gt;Version&lt;/b&gt; v3.0" vertex="1">
+          <mxGeometry height="24" width="404" x="1195" y="961" as="geometry" />
         </mxCell>
-        <mxCell id="v1" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" value="&lt;b&gt;Status&lt;/b&gt; Published" vertex="1">
-          <mxGeometry height="24" width="404" x="1195" y="904" as="geometry" />
+        <mxCell id="v1" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" value="&lt;b&gt;Status&lt;/b&gt; Validated on Fedora 45" vertex="1">
+          <mxGeometry height="24" width="404" x="1195" y="985" as="geometry" />
         </mxCell>
         <mxCell id="v2" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" value="&lt;b&gt;Owner&lt;/b&gt; NeumannTechTips" vertex="1">
-          <mxGeometry height="24" width="404" x="1195" y="928" as="geometry" />
+          <mxGeometry height="24" width="404" x="1195" y="1009" as="geometry" />
         </mxCell>
-        <mxCell id="v3" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" value="&lt;b&gt;Date&lt;/b&gt; 2026-08-08" vertex="1">
-          <mxGeometry height="24" width="404" x="1195" y="952" as="geometry" />
+        <mxCell id="v3" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" value="&lt;b&gt;Date&lt;/b&gt; 2026-11-14" vertex="1">
+          <mxGeometry height="24" width="404" x="1195" y="1033" as="geometry" />
         </mxCell>
-        <mxCell id="v5" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" value="&lt;b&gt;Viewpoint&lt;/b&gt; Logical build and install view of a manual package installation on Fedora 44 KDE." vertex="1">
-          <mxGeometry height="24" width="404" x="1195" y="982" as="geometry" />
+        <mxCell id="v5" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" value="&lt;b&gt;Viewpoint&lt;/b&gt; Logical build and install view of a manual package installation on Fedora 45 KDE Plasma, including Cowork virtualisation." vertex="1">
+          <mxGeometry height="24" width="404" x="1195" y="1063" as="geometry" />
         </mxCell>
         <mxCell id="v7" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" value="&lt;b&gt;Out of scope&lt;/b&gt; Application internals, account authentication, network topology, and the supported apt installation path on Debian and Ubuntu." vertex="1">
-          <mxGeometry height="24" width="404" x="1195" y="1019" as="geometry" />
+          <mxGeometry height="24" width="404" x="1195" y="1100" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

@@ -1,458 +1,746 @@
-# Installing Claude Desktop on Fedora 44 KDE
+<div align="center">
 
-**A manual installation guide for an officially unsupported platform, with integrity verification and a clean removal path.**
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/NeumannTechTips_Lockup_Horizontal_Tagline_OnDark.png">
+  <img alt="NeumannTechTips. Practical AI. Real results." src="assets/NeumannTechTips_Lockup_Horizontal_Tagline_OnLight.png" width="560">
+</picture>
+
+</div>
+
+# 🐧 Claude Desktop on Fedora 45 KDE Plasma
+
+> A manual installation guide for an officially unsupported platform. You install Anthropic's own, unmodified Linux package, prove its integrity through the full signature chain before anything touches `/usr`, and keep an exact record of every file so that updates and removal stay clean.
+
+[![Fedora](https://img.shields.io/badge/Fedora-45%20KDE%20Plasma-5DBBD6?labelColor=0B2039&logo=fedora&logoColor=white)](#-validated-configuration)
+[![KDE Plasma](https://img.shields.io/badge/KDE%20Plasma-6.8%20Wayland-5DBBD6?labelColor=0B2039&logo=kde&logoColor=white)](#-running-under-plasma-68)
+[![Claude Desktop](https://img.shields.io/badge/Claude%20Desktop-5.11492.5%20validated-F2A93B?labelColor=0B2039)](#-validated-configuration)
+[![Cowork](https://img.shields.io/badge/Cowork-working%20on%20KVM-F2A93B?labelColor=0B2039)](#-cowork-on-fedora-45)
+[![SELinux](https://img.shields.io/badge/SELinux-enforcing-2F5F7B?labelColor=0B2039)](#step-8-copy-into-place-label-and-register)
+[![Support](https://img.shields.io/badge/Anthropic%20support-Debian%20%26%20Ubuntu%20only-8FA3B8?labelColor=0B2039)](#-disclaimer)
+[![Licence](https://img.shields.io/badge/licence-MIT-2F5F7B?labelColor=0B2039)](#-licence)
+[![Language](https://img.shields.io/badge/language-UK%20English-2F5F7B?labelColor=0B2039)](#-licence)
+
+Maintained by **[NeumannTechTips](https://github.com/NeumannTechTips)** · YouTube [@NeumannTechTips](https://www.youtube.com/@NeumannTechTips) · Last validated: 14 November 2026
+
+`#Fedora45` `#FedoraKDE` `#KDEPlasma` `#Plasma6` `#Wayland` `#XWayland` `#Linux` `#ClaudeDesktop` `#Claude` `#Anthropic` `#Cowork` `#ClaudeCode` `#SELinux` `#KVM` `#PracticalAI` `#NeumannTechTips`
+
+---
+
+## 📖 Table of contents
+
+- [At a glance](#-at-a-glance)
+- [Why this guide exists](#-why-this-guide-exists)
+- [Choosing a route](#-choosing-a-route)
+- [Validated configuration](#-validated-configuration)
+- [Before you start](#-before-you-start)
+- [Installation](#-installation)
+- [Running under Plasma 6.8](#-running-under-plasma-68)
+- [Cowork on Fedora 45](#-cowork-on-fedora-45)
+- [Updating](#-updating)
+- [Removing](#-removing)
+- [Troubleshooting](#-troubleshooting)
+- [Known limitations](#-known-limitations)
+- [Reference architecture](#-reference-architecture)
+- [Repository contents](#-repository-contents)
+- [Sources](#-sources)
+- [Disclaimer](#-disclaimer)
+- [Related repositories](#-related-repositories)
+- [Licence](#-licence)
+
+---
+
+## 📋 At a glance
 
 | | |
 |---|---|
-| **Target platform** | Fedora 44 Workstation, KDE Plasma 6 |
-| **Architecture** | x86_64 (the arm64 route is identical, with one substitution) |
-| **Upstream package** | `claude-desktop_amd64.deb`, Anthropic's official Linux beta |
-| **Support status** | Unsupported by Anthropic on Fedora. This is a community procedure. |
-| **Author** | NeumannTechTips |
-| **Last validated** | 8 August 2026, end to end on real hardware, download through sign-in |
+| **Target platform** | Fedora 45 KDE Plasma Desktop Edition, KDE Plasma 6.8 |
+| **Architecture** | x86_64 validated. The arm64 package follows the same steps but has not been tested |
+| **Upstream package** | `claude-desktop_<version>_amd64.deb` from Anthropic's signed apt repository |
+| **Validated release** | Claude Desktop 5.11492.5 |
+| **Support status** | Not supported by Anthropic on Fedora. This is a community procedure |
+| **Earlier edition** | Fedora 44. The instructions below were not retested on Fedora 44 in this round |
 
 ---
 
-## Why this guide exists
+## 🎯 Why this guide exists
 
-Anthropic shipped a Linux beta of Claude Desktop as a Debian package, distributed through its own apt repository. The official documentation is clear about the boundary: Ubuntu 22.04 or later and Debian 12 or later are supported, on x86_64 or arm64, and support for other distributions is described as coming in the future. Fedora and RHEL are named explicitly as not supported today.
+Anthropic ships the Linux beta of Claude Desktop as a Debian package through its own apt repository. Its documentation supports Ubuntu 22.04 or later and Debian 12 or later, on x86_64 or arm64, and names Fedora and RHEL as distributions that are not supported today, with support for others described as coming in the future.
 
-That leaves Fedora users with three options. Wait for a native RPM. Use a third-party repackage. Or extract the official package and place its contents where a package manager would have put them.
+Fedora users therefore have three choices: wait for an official RPM, trust a community repackage, or place the contents of the official package where a package manager would have put them. This guide documents the third choice. Its defining property is provenance: the bytes you run are Anthropic's own, and you can prove that before installing anything. The cost is that `dnf` has no record of the result, so updates and removal become your responsibility.
 
-This guide covers the third option, because it has one property the others lack: the bytes you install are Anthropic's own, unmodified, and you can prove it before anything touches your system. The trade-off is that `dnf` has no record of the result, so updates and removal become your responsibility rather than the package manager's.
-
-If that trade-off does not appeal, two alternatives are worth considering first. A community project maintains RPM and AppImage repackages of the same official `.deb`, which restores update handling at the cost of trusting an intermediary. Alternatively, the Claude Code CLI has a native Fedora installer and an official RPM repository from Anthropic, and it runs the same engine as the Code tab in the desktop app. For terminal-centred work, the CLI may be all you need.
-
-## Before you start
-
-You will need roughly 1 GB of free space on the `/usr` filesystem, an active internet connection, and `sudo` rights. The application is Electron-based, so treat its memory appetite as comparable to a browser or a modern editor.
-
-Everything below runs from a terminal. Konsole is fine.
+> [!NOTE]
+> Fedora 45 changed the ground under the earlier edition of this guide. Plasma 6.8 no longer offers an X11 session, GnuPG's default key store ignores the `--keyring` option the old verification step relied on, and Claude Desktop itself moved through three major versions. Every section below reflects those changes.
 
 ---
 
-## Step 1: Confirm your architecture
+## 🔀 Choosing a route
+
+| Route | What you install | Updates | Trust model |
+|---|---|---|---|
+| **This guide** | Anthropic's official `.deb`, extracted by hand | Manual, using the procedure in [Updating](#-updating) | Anthropic's signing key only |
+| **Community repackage** | [`claude-desktop-unofficial`](https://github.com/aaddrick/claude-desktop-debian) RPM, AppImage or Nix build | Through `dnf` | Anthropic's package plus the community project's build and signing |
+| **Claude Code CLI only** | Anthropic's `claude-code` package from its signed dnf repository | Through `dnf` | Anthropic's signing key only |
+
+The community project rebased onto Anthropic's official Linux app in its v3.0.0 release. It now installs under `/usr/lib/claude-desktop-unofficial`, adds a diagnostic launcher, and serves a dnf repository. If you would rather have managed updates than first-hand provenance, it is the sensible alternative.
+
+For terminal-centred work, the CLI may be all you need. Anthropic publishes signed apt, dnf and apk repositories for it, and it runs the same engine as the Code tab in the desktop app.
+
+---
+
+## ✅ Validated configuration
+
+Every command in this guide was run on the machine below on 14 November 2026, unless the text says otherwise.
+
+| Component | Observed on the test machine |
+|---|---|
+| Release | Fedora 45 KDE Plasma Desktop Edition, upgraded in place from Fedora 44 |
+| Desktop | KDE Plasma 6.8.2, Wayland session |
+| Kernel | 7.3.3-300.fc45 |
+| Graphics | NVIDIA proprietary driver 620.70.06 |
+| SELinux | Enforcing, with `auditd` active |
+| Claude Desktop | 5.11492.5, updated from 2.42304.2 |
+| Display path | XWayland, through `--ozone-platform=x11` |
+| Integrity chain | Key fingerprint, `InRelease` signature, index hash and package SHA-256 all passed |
+| Installed tree | Byte-for-byte identical to the package, confirmed with `diff -rq` |
+| Sandbox helper | `chrome-sandbox` at mode 4755, owned by root, labelled `lib_t` |
+| Sign-in | Persisted across a restart through KDE Wallet |
+| Cowork | Started without any requirements message |
+
+> [!IMPORTANT]
+> **Not yet tested:** a first-time install on a freshly installed Fedora 45 system, native Wayland without the XWayland flag, arm64, the Quick Entry global hotkey, and Cowork with only the bundled `virtiofsd`. The update sequence in this guide also differs from the one run on the test machine in one deliberate respect, explained in [Updating](#-updating).
+
+---
+
+## 🧰 Before you start
+
+You need about 1 GB free on the filesystem holding `/usr`, a working internet connection, and `sudo` rights. Claude Desktop is an Electron application, so expect a memory footprint similar to a browser. Cowork adds a virtual machine on top of that.
+
+Run every step from Konsole, in **one terminal session**. Later steps reuse shell variables that earlier steps set, such as the version number and the staging path.
+
+> [!WARNING]
+> Many hardened Fedora systems set a umask of `0027`, which leaves files created as root unreadable by ordinary users. Step 3 sets a permissive umask for the installing terminal only. Close that terminal when you finish so your normal setting returns.
+
+---
+
+## 🛠️ Installation
+
+### Step 1: Confirm your architecture
 
 ```bash
 uname -m
 ```
 
-`x86_64` means you want the amd64 package, which is what the rest of this guide assumes. If you see `aarch64`, substitute `arm64` wherever `amd64` appears. No other step changes.
+`x86_64` means the amd64 package, which the rest of this guide assumes. On `aarch64`, the commands derive the right architecture automatically, but that path is untested.
 
-## Step 2: Install dpkg
+### Step 2: Install the tools
 
-Fedora cannot install `.deb` packages, but it does ship the `dpkg` toolchain, which is all you need to read one:
+Fedora cannot install `.deb` packages, but it does ship the `dpkg` toolchain, which can read one. The other packages provide the cache and registration tools used in Step 8. On a standard Fedora KDE system most of them are already present.
 
 ```bash
-sudo dnf install -y dpkg
+sudo dnf install dpkg curl gnupg2 shared-mime-info desktop-file-utils gtk-update-icon-cache
 ```
 
-This installs an extraction tool, not a second package manager. Nothing about your system's package management changes.
+This adds an extraction tool, not a second package manager. Nothing about how `dnf` manages your system changes.
 
-## Step 3: Create a working directory
-
-Keep the download, the staging tree and the manifest together. This matters later, when you need to remove or update the application:
+### Step 3: Prepare a working folder and a permanent record folder
 
 ```bash
-mkdir -p ~/claude-desktop-install && cd ~/claude-desktop-install
+umask 022
+mkdir -p ~/claude-desktop-install ~/.local/share/claude-desktop-fedora
+cd ~/claude-desktop-install
 ```
 
-## Step 4: Download the package
+The working folder holds downloads and can be emptied at any time. The record folder holds the install manifests and must survive. The earlier edition kept its manifest beside the downloads, and on the test machine that file was both misplaced and out of date by the time it was needed.
 
-The cleanest approach uses Anthropic's published command, which reads the repository index, finds the newest package for your architecture, and downloads it:
+### Step 4: Verify the signing key and the repository index
 
-```bash
-curl -fLO "https://downloads.claude.ai/claude-desktop/apt/stable/$(curl -s "https://downloads.claude.ai/claude-desktop/apt/stable/dists/stable/main/binary-$(dpkg --print-architecture)/Packages" | grep '^Filename: pool/main/c/claude-desktop/claude-desktop_' | sort -V | tail -n 1 | cut -d' ' -f2)"
-```
+Verification comes before the download, so that the version you choose is taken from an index you have already proven.
 
-If that command reports `Remote file name has no length`, the index lookup returned nothing. Confirm your network can reach `downloads.claude.ai` and that `dpkg --print-architecture` prints `amd64` or `arm64`.
+When apt installs a package, it checks a chain of trust on your behalf: Anthropic's key signs the release file, the release file records the hash of the package index, and the index records the SHA-256 digest of each package. Extracting a `.deb` by hand bypasses all of that, so this step rebuilds the chain link by link.
 
-You can also download through the browser from the Claude download page, though you will then need to locate the saved file yourself. Whichever route you take, confirm you have a real package before continuing:
+**Check the key.**
 
 ```bash
-ls -lh claude-desktop*.deb
-file claude-desktop*.deb
-```
-
-Expect a file in the region of 160 MB, reported as a Debian binary package. If `file` says HTML, you have downloaded an error page rather than the application.
-
-## Step 5: Verify what you downloaded
-
-This step is the reason the manual route can be done responsibly, so please do not skip it.
-
-When apt installs a package, it verifies a cryptographic chain on your behalf. The repository's release file is signed by Anthropic's key, that release file commits to the package index, and the index carries a SHA-256 digest for every package. Extracting a `.deb` by hand bypasses all of it. You are running 160 MB of code, much of it setuid-adjacent, on the strength of a URL. Reconstructing the checks by hand takes about a minute.
-
-### Verify the signing key
-
-```bash
+BASE="https://downloads.claude.ai/claude-desktop/apt/stable"
+ARCH=$(dpkg --print-architecture)
 curl -fsSLo claude-desktop-key.asc https://downloads.claude.ai/claude-desktop/key.asc
 gpg --show-keys claude-desktop-key.asc
 ```
 
-The fingerprint printed must be:
+The fingerprint must read:
 
 ```
 31DD DE24 DDFA B679 F42D  7BD2 BAA9 29FF 1A7E CACE
 ```
 
-If it differs, stop. Do not extract the package. Anthropic publishes this fingerprint in its own installation documentation, which is what makes it usable as an independent reference point.
+If it differs, stop. Anthropic publishes this fingerprint in its own installation documentation, which makes it an independent reference point.
 
-### Verify the package digest
-
-```bash
-ARCH=$(dpkg --print-architecture)
-BASE="https://downloads.claude.ai/claude-desktop/apt/stable"
-curl -fsSLo Packages "$BASE/dists/stable/main/binary-$ARCH/Packages"
-awk '/^Package: claude-desktop$/,/^$/' Packages | grep -E '^(Version|Filename|SHA256):'
-```
-
-That prints the published digest for each version in the index. Now compute the digest of your download:
+**Check the release file's signature in a throwaway key store.**
 
 ```bash
-sha256sum claude-desktop*.deb
-```
-
-The two values must match. A mismatch means the file was corrupted in transit or is not the package the repository published, and either way it should not be installed.
-
-### Verify the index itself, if you want the full chain
-
-The digest check above is only as trustworthy as the index it came from. To close that gap, verify the repository's signed release file against the key you already checked:
-
-```bash
-gpg --no-default-keyring --keyring ./claude-trust.gpg --import claude-desktop-key.asc
+export GNUPGHOME=$(mktemp -d)
+gpg --import claude-desktop-key.asc
 curl -fsSLo InRelease "$BASE/dists/stable/InRelease"
-gpg --no-default-keyring --keyring ./claude-trust.gpg --verify InRelease
+gpg --verify InRelease
+gpgconf --kill all
+rm -rf "$GNUPGHOME"; unset GNUPGHOME
 ```
 
-This uses a local, throwaway keyring rather than importing an unrelated key into your personal one. A good signature from the Anthropic key completes the chain: signature to release file, release file to index, index to package.
+Expect `Good signature from "Anthropic Claude Code Release Signing"`. The accompanying warning that the key "is not certified with a trusted signature" is normal: it only means nobody has signed this key into your personal web of trust, and the fingerprint check above covers that gap.
 
-One honest caveat. The `InRelease` path follows the standard Debian repository layout rather than a path published in Anthropic's documentation. If it returns a 404, try `dists/stable/Release` together with `dists/stable/Release.gpg` instead, which is the older equivalent. The digest check in the previous section remains valid either way, since its path is documented.
+> [!TIP]
+> The temporary `GNUPGHOME` matters on Fedora 45. GnuPG now uses the `keyboxd` key store by default, and in that mode it ignores `--keyring` and `--no-default-keyring`. The earlier edition's "throwaway keyring" command therefore imported Anthropic's key into your personal store. A separate home directory is the isolation method GnuPG's own maintainers recommend.
 
-## Step 6: Extract the package
-
-Extract as root. This matters more than it appears to:
+**Tie the package index to the signed release file.**
 
 ```bash
-sudo dpkg-deb -x claude-desktop*.deb extracted/
+curl -fsSLo Packages "$BASE/dists/stable/main/binary-$ARCH/Packages"
+grep -c "$(sha256sum Packages | cut -d' ' -f1)" InRelease
 ```
 
-Running the extraction under `sudo` preserves the root ownership and permission bits recorded inside the archive, including the setuid bit on the Chromium sandbox helper. Extract as a normal user and every file becomes yours, which breaks the sandbox and forces you to repair permissions afterwards. Getting this right here saves two troubleshooting steps later.
+A count of `1` or more proves that the index you downloaded is the one Anthropic signed.
 
-## Step 7: Record an install manifest
-
-`dnf` will not know these files exist, so write down what you are about to install before you install it:
+### Step 5: Choose the newest version and download it
 
 ```bash
-sudo find extracted/usr \( -type f -o -type l \) | sed 's|^extracted||' | sudo tee installed-files.txt > /dev/null
-wc -l installed-files.txt
+VER=$(awk '/^Package: claude-desktop$/,/^$/' Packages | awk '/^Version:/{print $2}' | sort -V | tail -n 1)
+read -r FILE SHA < <(awk -v v="$VER" '
+  /^Package: /  {p=$2}
+  /^Version: /  {ver=$2}
+  /^Filename: / {f=$2}
+  /^SHA256: /   {s=$2}
+  /^$/ { if (p=="claude-desktop" && ver==v) print f, s; p=ver=f=s="" }
+  END  { if (p=="claude-desktop" && ver==v) print f, s }' Packages)
+echo "Newest: $VER"
+
+curl -fLO "$BASE/$FILE"
+DEB=$(basename "$FILE")
+echo "$SHA  $DEB" | sha256sum -c -
 ```
 
-Note the `-type l` clause. The application's launcher at `/usr/bin/claude-desktop` is a symbolic link, not a regular file, and a manifest built with `-type f` alone would silently omit it. That omission only surfaces months later, when an incomplete uninstall leaves a broken link behind.
+The last line must print `OK`. A mismatch means the file was corrupted in transit or is not the package Anthropic published, and either way it must not be installed. Version 5.11492.5 is 183,335,272 bytes.
 
-## Step 8: Copy into place
+Optionally, confirm that the package writes nothing outside `/usr`. This command should print only `./`:
 
 ```bash
-sudo cp -a extracted/usr/. /usr/
+dpkg-deb -c "$DEB" | awk '{print $6}' | grep -v '^\./usr/'
 ```
 
-The `-a` flag is doing real work here. It preserves ownership, permission bits and symbolic links exactly as extracted. A plain `cp` does neither of two things you need: it drops the setuid bit as a deliberate safety measure, and it applies your shell's umask to everything it creates. On a hardened Fedora install with a restrictive umask, that combination produces an application that either cannot start or cannot be read by your own user account. The troubleshooting section covers the symptoms if you have already hit this.
+### Step 6: Extract into a fresh staging folder
+
+```bash
+STAGE=$(sudo mktemp -d /var/tmp/claude-desktop-stage.XXXXXX)
+sudo dpkg-deb -x "$DEB" "$STAGE"
+sudo rm -rf "$STAGE/usr/share/lintian"
+sudo ls -l "$STAGE/usr/lib/claude-desktop/chrome-sandbox"
+```
+
+Extracting as root preserves the ownership and permission bits recorded in the archive, above all the setuid bit on Chromium's sandbox helper, which must read `-rwsr-xr-x`. A **new, empty** staging folder matters as much: extracting a new version over an old one merges the two trees and carries obsolete files forward. The `lintian` file is Debian packaging metadata with no use on Fedora.
+
+### Step 7: Record the install manifest
+
+```bash
+MANIFEST=~/.local/share/claude-desktop-fedora/installed-files-$VER.txt
+sudo find "$STAGE/usr" \( -type f -o -type l \) | sed "s|^$STAGE||" | sort > "$MANIFEST"
+echo /usr/share/mime/packages/com.anthropic.Claude.xml >> "$MANIFEST"
+wc -l "$MANIFEST"
+```
+
+Version 5.11492.5 produces 100 entries. The file is owned by you and named after the version, so each update leaves an exact record of what it installed. The `-type l` clause captures the launcher at `/usr/bin/claude-desktop`, which is a symbolic link. The manifest from the earlier edition on the test machine had lost that entry, which would have left a dangling link behind after removal.
+
+### Step 8: Copy into place, label and register
+
+```bash
+sudo tar -C "$STAGE" -cf - usr | sudo tar -C / -xpf - --no-overwrite-dir
+
+sudo install -Dm644 /usr/lib/claude-desktop/resources/linux-mime/com.anthropic.Claude.xml \
+  /usr/share/mime/packages/com.anthropic.Claude.xml
+sudo update-mime-database /usr/share/mime
+sudo update-desktop-database /usr/share/applications
+sudo gtk-update-icon-cache -qf /usr/share/icons/hicolor
+
+sudo restorecon -RF /usr/lib/claude-desktop
+xargs -a "$MANIFEST" sudo restorecon -F
+sudo rm -rf "$STAGE"
+```
+
+Each block does a specific job:
+
+| Command | Why it is needed |
+|---|---|
+| `tar -p` with `--no-overwrite-dir` | Preserves ownership, permission bits, the setuid bit and symbolic links exactly as extracted, and leaves the metadata of existing directories such as `/usr/share` untouched |
+| `install` and `update-mime-database` | Registers the `.mcpb`, `.dxt` and `.skill` file types, which the package's Debian install script would otherwise have done |
+| `update-desktop-database` and `gtk-update-icon-cache` | Refreshes the system's desktop entry and icon caches |
+| `restorecon` | Gives the new files the SELinux labels Fedora's policy expects for their location |
+
+> [!NOTE]
+> The earlier edition used `cp -a`. That flag preserves every attribute it can, SELinux labels included, so it carries the staging folder's labels into `/usr`. It can also re-apply the staging folder's own permissions and timestamps to existing system directories. The `tar` pipeline avoids both, and it is the method used on the test machine.
 
 Confirm the result:
 
 ```bash
-ls -la /usr/bin/claude-desktop
-ls -la /usr/lib/claude-desktop/chrome-sandbox
+ls -l /usr/bin/claude-desktop
+ls -lZ /usr/lib/claude-desktop/chrome-sandbox
 ```
 
-The first should be a symbolic link pointing into `../lib/claude-desktop/`. The second must read `-rwsr-xr-x`, with an `s` in the owner-execute position. That `s` is the setuid bit, and Chromium's sandbox will not initialise without it.
+The first must be a symbolic link into `../lib/claude-desktop/`. The second must read `-rwsr-xr-x. 1 root root system_u:object_r:lib_t:s0`.
 
-## Step 9: Refresh the Plasma menu
-
-KDE caches its list of installed applications, so a desktop entry placed directly on disk stays invisible until the cache is rebuilt:
+### Step 9: Refresh the Plasma menu
 
 ```bash
 kbuildsycoca6
 ```
 
-On Plasma 5, use `kbuildsycoca5` instead. There is no output on success.
+KDE caches its list of applications, so a desktop entry placed directly on disk stays invisible until the cache is rebuilt. There is no output on success.
 
-## Step 10: Launch
-
-```bash
-claude-desktop
-```
-
-Run it in the foreground the first time rather than backgrounding it with `&`, so that any startup error reaches your terminal instead of disappearing into job control.
-
-`/usr/bin` is already on the `PATH` of every user on a standard Fedora system, so there is nothing to add to your shell profile and nothing that resets on reboot. The command works from any directory, in any new terminal, permanently.
-
-You should now also find Claude in the Plasma application launcher, with its icon. Right-click it there to pin it to your task manager or favourites if you would rather not use a terminal at all.
-
-Sign in with your Anthropic account. Chat is available on every plan including Free. Claude Code and Cowork require Pro, Max, Team or Enterprise.
-
----
-
-## Native Wayland sessions: one additional flag
-
-Fedora's KDE spin defaults to a native Wayland session, and Claude Desktop's Chromium base has two known rough edges under native Wayland that do not appear under X11 or under XWayland. Neither is dangerous, but both are worth heading off before they look like a broken install.
-
-Test it directly first:
+### Step 10: Launch
 
 ```bash
 claude-desktop --ozone-platform=x11
 ```
 
-If the welcome screen appears and you see:
+Run it in the foreground the first time so that any start-up error reaches your terminal. The flag is explained in the next section, which also shows how to make it permanent.
 
-```
-ERROR:media/gpu/vaapi/vaapi_wrapper.cc: vaInitialize failed: unknown libva error
-```
+Sign in with your Anthropic account. Chat is available on every plan, including Free. Claude Code and Cowork require a paid plan: Pro, Max, Team or Enterprise.
 
-or a line mentioning `dri_gbm.so` and `Permission denied`, that is expected and covered below in Troubleshooting. Both are cosmetic. If the window opens, the flag works and the install is functioning correctly.
+---
 
-Make it permanent without editing Anthropic's own desktop file, since that file is overwritten on every future update. Write a user-level override instead, which KDE's XDG lookup rules read ahead of the system one:
+## 🖥️ Running under Plasma 6.8
+
+Plasma 6.8 is Wayland-only. The X11 session has been removed from the login screen, and applications written for X11 now run through the XWayland compatibility layer. On Fedora 45, `echo $XDG_SESSION_TYPE` therefore prints `wayland` for every Plasma login.
+
+The `--ozone-platform=x11` flag tells Claude Desktop's Chromium engine to run as an XWayland client instead of a native Wayland one. That is the configuration validated on the test machine. The earlier edition adopted it to avoid rendering problems under native Wayland on Fedora 44, and native Wayland has not been retested on Fedora 45.
+
+To apply the flag from the application launcher and the desktop actions as well, create a per-user copy of the desktop entry. Never edit Anthropic's own file: every update overwrites it.
 
 ```bash
 mkdir -p ~/.local/share/applications
-cp /usr/share/applications/com.anthropic.Claude.desktop ~/.local/share/applications/
-sed -i 's|^Exec=claude-desktop|Exec=claude-desktop --ozone-platform=x11|' ~/.local/share/applications/com.anthropic.Claude.desktop
+sed -E 's/^Exec=claude-desktop /Exec=claude-desktop --ozone-platform=x11 /' \
+  /usr/share/applications/com.anthropic.Claude.desktop \
+  > ~/.local/share/applications/com.anthropic.Claude.desktop
+update-desktop-database ~/.local/share/applications
+kbuildsycoca6
+grep '^Exec=' ~/.local/share/applications/com.anthropic.Claude.desktop
+```
+
+Version 5.11492.5 has three `Exec=` lines, the main entry and two desktop actions, and every one should carry the flag.
+
+> [!CAUTION]
+> Your copy takes precedence over the system entry, so it also hides anything a later version adds to that entry, such as new file-type handlers or menu actions. Regenerate it after every update with the same commands. [Updating](#-updating) includes this step.
+
+| Desktop integration | State on the test machine |
+|---|---|
+| System tray icon | Working, with `libayatana-appindicator-gtk3` installed |
+| KDE portal (`xdg-desktop-portal-kde`) | Installed by default on Fedora 45 KDE |
+| Quick Entry global hotkey | Not tested. Anthropic documents it as working on X11, and as depending on the desktop's GlobalShortcuts portal under native Wayland |
+
+---
+
+## 🧪 Cowork on Fedora 45
+
+Cowork runs its longer agentic tasks inside a virtual machine that Claude Desktop hosts with QEMU and KVM. The package bundles some of what that needs, and the host must supply the rest.
+
+| Requirement | On Fedora 45 | State on the test machine |
+|---|---|---|
+| Hardware virtualisation | Enable VT-x or AMD-V in firmware | `vmx` flag present, `kvm_intel` loaded |
+| QEMU | `qemu-system-x86-core` | Installed |
+| UEFI firmware | `edk2-ovmf` | Installed. The package itself provides Debian-style links under `/usr/share/OVMF` |
+| `virtiofsd` | Bundled at `/usr/lib/claude-desktop/resources/virtiofsd`. Fedora's `virtiofsd` package is optional | Both present during the test |
+| `/dev/kvm` | Membership of the `kvm` group | Group member. Device was `root:kvm` with mode `0666` |
+| `/dev/vhost-vsock` | `vhost_vsock` kernel module | Module present in the kernel tree, device node present at boot |
+
+Check your system in one pass. These commands only read:
+
+```bash
+grep -m1 -oE 'vmx|svm' /proc/cpuinfo || echo "no virtualisation flag: enable it in firmware"
+rpm -q qemu-system-x86-core edk2-ovmf
+ls -l /dev/kvm /dev/vhost-vsock
+id -nG | tr ' ' '\n' | grep -x kvm || echo "not in the kvm group"
+modinfo -n vhost_vsock
+ls -l /usr/share/OVMF/
+```
+
+Fix anything missing:
+
+```bash
+sudo dnf install qemu-system-x86-core edk2-ovmf
+sudo usermod -aG kvm "$USER"
+```
+
+Log out and back in after joining the group. Anthropic's documentation asks for group membership even where `/dev/kvm` already opens, because `/dev/vhost-vsock` is normally restricted to the `kvm` group. If Cowork reports that it requires the `vhost_vsock` module, load it now and on every boot:
+
+```bash
+sudo modprobe vhost_vsock
+echo vhost_vsock | sudo tee /etc/modules-load.d/vhost_vsock.conf
+```
+
+Claude Desktop checks these requirements once, at launch, so restart it after any change.
+
+> [!NOTE]
+> Cowork's firmware lookup expects Debian's `/usr/share/OVMF` path. On Fedora 45, `edk2-ovmf` (version `20260812-10.fc45` on the test machine) already ships that path as links into `/usr/share/edk2/ovmf`, so no manual symlink is needed. The community repackage adds one of its own for distributions that lack it.
+
+---
+
+## ♻️ Updating
+
+The desktop app does not update itself on Linux, and `dnf` does not know it exists. Check the index for a newer version whenever you like by repeating Steps 3 to 5. The newest version is printed after `Newest:`, and you can compare it with your latest manifest:
+
+```bash
+ls ~/.local/share/claude-desktop-fedora/
+```
+
+To update:
+
+1. **Quit Claude Desktop completely**, including from the system tray, then confirm nothing is left running:
+
+   ```bash
+   pgrep -f '^/usr/lib/claude-desktop/claude-desktop' && echo "still running" || echo "stopped"
+   ```
+
+2. **Decide about your settings.** A major version may migrate `~/.config/Claude` into a form older builds cannot read, so back it up now if you want a true rollback point. Check its size first, because Cowork data makes it large: it was 1.5 GB on the test machine.
+
+   ```bash
+   du -sh ~/.config/Claude
+   cp -a ~/.config/Claude ~/.config/Claude.bak-before-update
+   ```
+
+3. **Verify, download, stage and record** by repeating Steps 3 to 7. Keep the previous manifest's path for step 6 of this list:
+
+   ```bash
+   OLD=$(ls ~/.local/share/claude-desktop-fedora/installed-files-*.txt | sort -V | tail -n 2 | head -n 1)
+   echo "$OLD"
+   ```
+
+4. **Move the current version aside**, so that a failed copy can be rolled back:
+
+   ```bash
+   sudo mv /usr/lib/claude-desktop /usr/lib/claude-desktop.prev
+   ```
+
+5. **Install** by repeating Steps 8 and 9.
+
+6. **List files the old version placed outside `/usr/lib/claude-desktop` that the new version no longer ships:**
+
+   ```bash
+   comm -23 <(grep -v '^/usr/lib/claude-desktop/' "$OLD" | sort) \
+            <(grep -v '^/usr/lib/claude-desktop/' "$MANIFEST" | sort)
+   ```
+
+   Review the list. If it is not empty, remove those files by adding `| xargs -r sudo rm -v` to the same command.
+
+7. **Regenerate your per-user desktop entry** with the commands in [Running under Plasma 6.8](#-running-under-plasma-68).
+
+8. **Launch and confirm the version** from the running process:
+
+   ```bash
+   pgrep -af 'type=renderer' | grep -o '"appVersion":"[^"]*"' | sort -u
+   ```
+
+9. **Delete the previous version** once you are satisfied:
+
+   ```bash
+   sudo rm -rf /usr/lib/claude-desktop.prev
+   ```
+
+   Do not leave it in place. It contains an outdated copy of `chrome-sandbox` that still carries the setuid-root bit.
+
+To roll back before step 9, quit the app, then run `sudo rm -rf /usr/lib/claude-desktop && sudo mv /usr/lib/claude-desktop.prev /usr/lib/claude-desktop`. After step 9, reinstall the older package by following the installation steps with its version number, which the signed index continues to list.
+
+> [!NOTE]
+> On the test machine, the update from 2.42304.2 to 5.11492.5 deleted the old directory before copying the new one. That worked, but it left no rollback copy if the copy had failed. Moving the old directory aside first is the safer order, and it is the only step here that was not run verbatim.
+
+---
+
+## 🗑️ Removing
+
+Your most recent manifest turns removal into an exact operation. Read it before using it, because it drives `rm` with `sudo`.
+
+```bash
+MANIFEST=$(ls ~/.local/share/claude-desktop-fedora/installed-files-*.txt | sort -V | tail -n 1)
+less "$MANIFEST"
+
+xargs -a "$MANIFEST" sudo rm -fv
+sudo rm -rf /usr/lib/claude-desktop /usr/lib/claude-desktop.prev /usr/share/doc/claude-desktop
+sudo update-mime-database /usr/share/mime
+sudo update-desktop-database /usr/share/applications
+sudo gtk-update-icon-cache -qf /usr/share/icons/hicolor
+rm -f ~/.local/share/applications/com.anthropic.Claude.desktop*
 kbuildsycoca6
 ```
 
-Confirm all three `Exec=` lines picked up the flag, the main entry plus the two quick actions:
-
-```bash
-grep ^Exec= ~/.local/share/applications/com.anthropic.Claude.desktop
-```
-
-You should see `--ozone-platform=x11` on every line. This makes the flag apply automatically from the application launcher and from Quick Entry, not only when launched by hand from a terminal.
-
-If you're on an X11 session rather than Wayland, or you're using XWayland, none of this is necessary. Check with:
-
-```bash
-echo $XDG_SESSION_TYPE
-```
+Your settings and conversation data in `~/.config/Claude` are left alone. Delete that folder separately if you want a complete removal. The record folder can go last: `rm -rf ~/.local/share/claude-desktop-fedora`.
 
 ---
 
-## Desktop integration extras
+## 🩺 Troubleshooting
 
-Two optional packages fix issues that only appear on some setups.
+### Migrating from the Fedora 44 edition of this guide
 
-If the system tray icon does not appear:
+The earlier edition wrote one manifest, `installed-files.txt`, and its update procedure never regenerated it. After any update that file no longer matches what is installed: on the test machine, 1,816 of its entries no longer existed and 3,939 installed files were missing from it. Do not remove anything with it.
 
-```bash
-sudo dnf install -y libayatana-appindicator-gtk3
-```
-
-If you run a Wayland session and the Quick Entry global hotkey does nothing, it needs KDE's global shortcuts portal. Fedora's KDE spin normally ships this already, so check before installing:
+Find which package you actually have by comparing each `.deb` you still hold against the installed tree:
 
 ```bash
-sudo dnf install -y xdg-desktop-portal-kde
+for d in ~/Downloads/claude-desktop*.deb ~/claude-desktop-install/claude-desktop*.deb; do
+  [ -f "$d" ] || continue
+  t=$(mktemp -d ~/cmp.XXXXXX)
+  dpkg-deb -x "$d" "$t"
+  echo "$(dpkg-deb -f "$d" Version): $(diff -rq "$t/usr/lib/claude-desktop" /usr/lib/claude-desktop | wc -l) differences"
+  rm -rf "$t"
+done
 ```
 
-The hotkey works without extra configuration on X11.
-
----
-
-## Troubleshooting
-
-### `command not found` after a successful copy
-
-The copy did not complete. It is easy to miss, because `cp` can fail partway with very little to say for itself. Re-run the copy verbosely and read the output:
+The package with `0` differences is the one installed. Because the earlier edition copied with `cp -a`, also check that the system directories it wrote into still carry their expected SELinux labels. The `-n` flag makes this a dry run that only reports:
 
 ```bash
-cd ~/claude-desktop-install
-sudo cp -av extracted/usr/. /usr/
+sudo restorecon -nv /usr /usr/bin /usr/lib /usr/share /usr/share/applications /usr/share/icons/hicolor /usr/share/doc
 ```
 
-Then confirm the symlink exists at `/usr/bin/claude-desktop`.
+No output means nothing is mislabelled. If paths are listed, run the same command without `-n` to correct them. From there, the cleanest path is a normal update to the newest version, which writes a correct manifest in the new record folder. Look also for a leftover rollback directory such as `/usr/lib/claude-desktop.<version>.bak` from an earlier manual update. Each one holds an old setuid `chrome-sandbox`, so remove it once the current version works.
 
-### `vaInitialize failed` on launch
+### `gpg: Note: Specified keyrings are ignored due to option "use-keyboxd"`
 
-```
-ERROR:media/gpu/vaapi/vaapi_wrapper.cc:1658 vaInitialize failed: unknown libva error
-```
-
-Hardware video decode is unavailable, and Chromium falls back to software decoding automatically. This affects only embedded video playback inside the app, nothing else, and does not prevent the app from starting. Safe to ignore unless you specifically need hardware-accelerated video.
-
-### `dri_gbm.so: Permission denied` on launch, despite correct file permissions
-
-```
-MESA-LOADER: failed to open dri: /usr/lib64/gbm/dri_gbm.so: cannot open shared object file: Permission denied
-```
-
-This looks alarming because "Permission denied" usually means a Unix permissions or SELinux problem, and it is worth ruling both out properly rather than guessing, in this order:
-
-**1. Check the file itself.** It should already be correct, since this is a stock Fedora system library your install never touched:
+You ran a verification command written for the earlier edition. GnuPG ignored the `--keyring` option and placed Anthropic's key in your personal key store. Use the temporary `GNUPGHOME` method from Step 4 instead. To remove the key that was imported by mistake:
 
 ```bash
-ls -la /usr/lib64/gbm/dri_gbm.so
+gpg --delete-keys 31DDDE24DDFAB679F42D7BD2BAA929FF1A7ECACE
 ```
 
-Expect `-rwxr-xr-x root root`, world-readable and world-executable. If that is what you see, standard Unix permissions are not the cause.
+### Claude Desktop asks you to sign in every time
 
-**2. Check SELinux properly, not just with `getenforce`.** A denial can only be ruled out by actually finding no denial logged, which depends on `auditd` running:
+The app stores its sign-in in the desktop keyring, which on Fedora KDE is KDE Wallet. Anthropic's documentation describes a conflict when GNOME Keyring is also installed on a Plasma desktop, and a failure to save when the keyring is locked. Check what you have before changing anything:
 
 ```bash
-systemctl is-active auditd
-sudo ausearch -m avc -ts recent
+rpm -q kwalletmanager5 kf6-kwallet gnome-keyring
+dnf repoquery --installed --whatrequires gnome-keyring
 ```
 
-If `ausearch` returns `<no matches>` **and** `auditd` is active, that is a genuine negative, SELinux is not involved. If `auditd` is inactive, `ausearch` will report no matches regardless of what happened, so check the kernel ring buffer directly instead:
+If `gnome-keyring` is installed and nothing you need depends on it, removing it and restarting resolves the conflict Anthropic describes. On the test machine, sign-in persisted without any change.
+
+### The launcher opens the app without new features, or new menu actions are missing
+
+Your per-user desktop entry in `~/.local/share/applications` still reflects an older version and is hiding the current system entry. Regenerate it as shown in [Running under Plasma 6.8](#-running-under-plasma-68).
+
+### `.mcpb`, `.dxt` or `.skill` files do not open in Claude Desktop
+
+The MIME registration in Step 8 was skipped or failed. Re-run the `install` and `update-mime-database` commands from that step, then check the association:
 
 ```bash
-sudo dmesg | grep -i denied
-sudo journalctl -k -g denied
+xdg-mime query filetype some-extension.mcpb
 ```
 
-Empty results across all of these mean SELinux genuinely is not the cause, and no `restorecon` or policy change is needed.
+### `Permission denied` when reading files under `/usr/lib/claude-desktop`
 
-**3. The actual cause: Chromium's internal GPU sandbox, not the OS.** Independently of the setuid `chrome-sandbox` helper fixed during installation, Chromium's GPU process applies its own internal restriction on which library paths it will open. The package is built assuming Debian's multiarch layout (`/usr/lib/x86_64-linux-gnu/...`), and Fedora uses `/usr/lib64/...` instead. The library is present and its permissions are correct, but the sandboxed GPU process does not recognise that path as one it is allowed to touch, and reports the refusal back as a permission failure rather than a missing-file one.
-
-To confirm this specifically, as a one-off diagnostic only:
-
-```bash
-claude-desktop --ozone-platform=x11 --disable-gpu-sandbox
-```
-
-If the `dri_gbm.so` line disappears, that confirms the cause. **Do not leave this flag on permanently.** It disables a real security boundary around a process that renders remote content, for the sake of a cosmetic rendering path. The practical effect of the original error, with the flag left off, is that the app falls back to software rendering (`llvmpipe`). Chat, Cowork and Claude Code all function normally under software rendering; you lose GPU-accelerated compositing, nothing more.
-
-### `Permission denied` when listing files under `/usr/lib/claude-desktop`
-
-Your umask stripped the world-execute bit from the directory when it was created. Reading a file requires execute permission on every directory above it, so a directory at `drwxr-x---` blocks your own user account from reaching anything inside.
-
-Diagnose it precisely rather than guessing which directory is at fault:
+A restrictive umask stripped the "other" permission bits from directories created during the copy. Reading a file requires execute permission on every directory above it, so one directory at `drwxr-x---` is enough to lock your own account out. Find the offending component with:
 
 ```bash
 umask
 namei -l /usr/lib/claude-desktop/chrome-sandbox
 ```
 
-`namei` prints the permissions of every component in the path, so the offending directory is obvious. A umask of `0027` is the usual culprit: it removes all "other" permissions from anything the process creates, and `sudo` inherits the umask of your interactive shell.
-
-Since the umask only ever stripped the "other" bucket and left "group" alone, mirroring group onto other restores exactly what was lost:
+A umask of `0027` removes only the "other" bucket, so mirroring "group" onto "other" restores exactly what was lost:
 
 ```bash
-sudo chmod -R o=g /usr/lib/claude-desktop
-sudo chmod -R o=g /usr/share/doc/claude-desktop
+sudo chmod -R o=g /usr/lib/claude-desktop /usr/share/doc/claude-desktop
 sudo chmod o=g /usr/share/applications/com.anthropic.Claude.desktop
 sudo find /usr/share/icons/hicolor -iname 'claude-desktop.png' -exec chmod o=g {} \;
 ```
 
-To avoid this on future manual installs without changing your session's umask, scope a permissive one to the single command that needs it:
+The same umask can make other root-written files unreadable, including `.repo` files under `/etc/yum.repos.d`, which then break `dnf repolist` for ordinary users. Step 3's `umask 022` prevents this during installation.
+
+### The app exits immediately on launch
+
+Check the sandbox helper:
 
 ```bash
-(umask 022 && sudo cp -a extracted/usr/. /usr/)
+ls -l /usr/lib/claude-desktop/chrome-sandbox
 ```
 
-### The application crashes immediately on launch
-
-Check the sandbox helper's permission bits:
-
-```bash
-ls -la /usr/lib/claude-desktop/chrome-sandbox
-```
-
-If the owner-execute position shows `x` rather than `s`, the setuid bit was stripped during the copy. Restore it:
+If the owner-execute position shows `x` instead of `s`, the setuid bit was lost. Restore it:
 
 ```bash
 sudo chown root:root /usr/lib/claude-desktop/chrome-sandbox
 sudo chmod 4755 /usr/lib/claude-desktop/chrome-sandbox
+sudo restorecon -F /usr/lib/claude-desktop/chrome-sandbox
 ```
 
-Resist the temptation to work around this with `--no-sandbox`. That flag disables a genuine security boundary in a browser engine that renders remote content, which is a poor trade for saving one `chmod`.
+Do not work around this with `--no-sandbox`. That flag disables a genuine security boundary in a browser engine that renders remote content.
 
-### `Broken pipe` from `dpkg-deb`
+### `dri_gbm.so: Permission denied` on launch
 
-Harmless. If you piped `dpkg-deb -c` into `head`, the pipe closed once `head` had its lines while `dpkg-deb` was still writing. Nothing failed.
+<details>
+<summary><strong>Diagnosis, recorded on Fedora 44 and not re-observed on Fedora 45</strong></summary>
 
-### Nothing in `~/Downloads`
+```
+MESA-LOADER: failed to open dri: /usr/lib64/gbm/dri_gbm.so: cannot open shared object file: Permission denied
+```
 
-The browser saved it elsewhere. Search rather than guess:
+"Permission denied" usually points to file permissions or SELinux, so rule both out properly before drawing conclusions.
+
+**1. Check the file.** It is a stock Fedora library that this install never touches, and it should read `-rwxr-xr-x root root`:
 
 ```bash
-find ~ -maxdepth 3 -iname "*claude-desktop*.deb" 2>/dev/null
+ls -l /usr/lib64/gbm/dri_gbm.so
 ```
 
----
-
-## Updating
-
-Nothing updates automatically on this path. The desktop app has no built-in updater on Linux, and `dnf` does not know the package exists.
-
-When a new version is released, repeat steps 4 through 9 with the fresh package. The copy overwrites the previous files in place. Re-run the integrity verification each time, because a signing key and a digest that were correct last month tell you nothing about this month's download.
-
-## Removing
-
-The manifest you wrote in step 7 turns removal from guesswork into an exact operation:
+**2. Check SELinux by looking for a logged denial.** `getenforce` alone proves nothing, and a search only counts if `auditd` is running:
 
 ```bash
-cd ~/claude-desktop-install
-sudo xargs -a installed-files.txt rm -v
-sudo rm -rf /usr/lib/claude-desktop /usr/share/doc/claude-desktop
-kbuildsycoca6
+systemctl is-active auditd
+sudo ausearch -m avc -ts recent
 ```
 
-Review `installed-files.txt` before running this. It drives `rm` with `sudo`, and a manifest generated against the wrong directory would do real damage.
+If `auditd` is inactive, search the kernel log instead with `sudo journalctl -k -g denied`.
+
+**3. Likely cause: Chromium's own GPU sandbox.** The package is built for Debian's multiarch library layout (`/usr/lib/x86_64-linux-gnu`), while Fedora uses `/usr/lib64`. The sandboxed GPU process appears to refuse a path it does not recognise and reports the refusal as a permission error. As a one-off diagnostic only:
+
+```bash
+claude-desktop --ozone-platform=x11 --disable-gpu-sandbox
+```
+
+If the message disappears, that confirms the cause. Do not keep the flag. Without it, the app falls back to software rendering, and Chat, Code and Cowork all work normally.
+
+</details>
+
+### Minor messages
+
+| Message | Meaning |
+|---|---|
+| `vaInitialize failed: unknown libva error` | Hardware video decoding is unavailable, so Chromium decodes embedded video in software. Nothing else is affected |
+| `Broken pipe` from `dpkg-deb` | You piped its output into `head`, which closed the pipe early. Nothing failed |
+| `Remote file name has no length` from `curl` | The index lookup returned nothing. Check that `downloads.claude.ai` is reachable and that `dpkg --print-architecture` prints `amd64` or `arm64` |
 
 ---
 
-## Known limitations of the Linux beta
+## ⚠️ Known limitations
 
-Several features present on macOS and Windows are absent on Linux, independently of anything Fedora-specific:
+**From the Linux beta itself**, regardless of distribution:
 
-- Computer Use, meaning application and screen control, is not available.
-- Voice dictation is not available in the desktop app. The CLI supports it.
-- The Quick Entry global hotkey works on X11. Under native Wayland it depends on the desktop environment's GlobalShortcuts portal.
+| Feature | Status on Linux |
+|---|---|
+| Chat, Claude Code and Cowork | Available |
+| Computer Use (application and screen control) | Not available |
+| Dictation in the desktop app | Not available. The CLI supports voice dictation |
+| Quick Entry global hotkey | Works on X11. Under native Wayland it depends on the desktop's GlobalShortcuts portal |
+| Self-updating | Not available. Updates arrive only through the package manager on supported systems |
 
-Chat, Cowork and Claude Code are all present in the Linux beta.
+**From this installation method:**
 
-On top of those, this installation method adds two of its own. You lose automatic updates, and you lose the package manager's dependency resolution, which means a future release depending on a newer system library will fail at runtime rather than being caught at install time.
+- `dnf` neither updates nor tracks the application. A future release that needs a newer system library will fail at run time instead of being caught at install time.
+- The package's Debian install script never runs. The table below shows what that skips.
+
+| Action in the package's install script | Needed on Fedora 45 KDE? |
+|---|---|
+| AppArmor profile for Ubuntu 24.04 and later | No. Fedora confines applications with SELinux |
+| Apt signing key, repository entry and unattended-upgrades rule | No. Registering a Debian repository on an RPM system would be wrong |
+| GNOME Shell search provider | No. Plasma does not use it |
+| `/usr/bin/ccd` terminal launcher link | Only when a build ships `resources/bin/ccd`. Version 5.11492.5 does not |
+| MIME types for `.mcpb`, `.dxt` and `.skill` | Yes. Step 8 replicates it |
 
 ---
 
-## Reference architecture
+## 🏗️ Reference architecture
 
-![Reference architecture for the manual installation of Claude Desktop on Fedora 44 KDE, showing six layers from upstream distribution through to the lifecycle control plane](claude-desktop-fedora-install-architecture.png)
+![Reference architecture for the manual installation of Claude Desktop on Fedora 45 KDE Plasma, showing seven layers from upstream distribution through to Cowork virtualisation](claude-desktop-fedora-install-architecture.png)
 
-A Type 1 board-pack view of the installation, built for print and for reading on paper rather than on screen. It runs across six layers: upstream distribution, acquisition and integrity verification, staging and extraction, target filesystem, hardening and desktop integration, and the lifecycle control plane. Layer membership is carried by row position and the caption chips down the left edge, with no swimlane containers, so the structure survives being exported flat into a slide or a PDF.
+A board-pack view of the installation, built for print as much as for the screen. It runs across seven layers: upstream distribution, acquisition and integrity verification, staging and extraction, the target filesystem, hardening and desktop integration, the lifecycle control plane, and Cowork virtualisation. Layer membership is carried by row position and the caption chips down the left edge, without swimlane containers, so the structure survives being exported flat into a slide or a PDF.
 
-Connector line style carries the interaction pattern. Solid lines are synchronous, dotted lines are bulk or file transfer, and grey dashed lines are the control plane. Each connector carries a reference from F1 to F15, resolved in the flow-reference table on the diagram itself.
-
-Three formats are provided. The `.png` above is the rendered view. A scalable `.svg` is included for printing or embedding at any size. The editable `.drawio` source opens in [diagrams.net](https://app.diagrams.net), the draw.io desktop application, or the VS Code extension.
+Line style carries the interaction pattern. Solid lines are synchronous, dotted lines are bulk or file transfer, and grey dashed lines belong to the control plane. Each connector carries a reference, resolved in the flow-reference table on the diagram.
 
 | File | Use |
 |---|---|
 | `claude-desktop-fedora-install-architecture.png` | Viewing, and the version embedded above |
 | `claude-desktop-fedora-install-architecture.svg` | Printing and scaling without quality loss |
-| `claude-desktop-fedora-install-architecture.drawio` | Editing the diagram |
+| `claude-desktop-fedora-install-architecture.drawio` | Editing in [diagrams.net](https://app.diagrams.net), the draw.io desktop app or the VS Code extension |
 
 ---
 
-## Sources
+## 📂 Repository contents
 
-- [Claude Desktop on Linux (beta)](https://code.claude.com/docs/en/desktop-linux), Anthropic. Supported distributions, repository configuration, signing key fingerprint, package pool lookup, and the feature gaps in the Linux beta.
-- [Download Claude](https://claude.ai/download), Anthropic. Platform availability and plan requirements.
-- [claude-desktop-debian](https://github.com/aaddrick/claude-desktop-debian). Community repackaging of the official Linux `.deb` into RPM, AppImage and Nix formats, for readers who would prefer a managed package over this manual route.
+<details>
+<summary><strong>Folder tree</strong></summary>
+
+```
+claude-desktop-fedora-kde/
+├── README.md                                          this guide
+├── LICENSE                                            MIT
+├── assets/
+│   ├── NeumannTechTips_Lockup_Horizontal_Tagline_OnDark.png
+│   └── NeumannTechTips_Lockup_Horizontal_Tagline_OnLight.png
+├── claude-desktop-fedora-install-architecture.drawio  editable diagram source
+├── claude-desktop-fedora-install-architecture.png     rendered diagram
+└── claude-desktop-fedora-install-architecture.svg     scalable diagram
+```
+
+</details>
+
+**Files this guide creates on your system:**
+
+| Location | Purpose |
+|---|---|
+| `/usr/lib/claude-desktop/` | The application |
+| `/usr/bin/claude-desktop` | Launcher symlink |
+| `/usr/share/applications/com.anthropic.Claude.desktop` | System desktop entry |
+| `/usr/share/icons/hicolor/*/apps/claude-desktop.png` | Icons in five sizes |
+| `/usr/share/mime/packages/com.anthropic.Claude.xml` | File-type registration |
+| `/usr/share/doc/claude-desktop/copyright` | Licence text |
+| `~/.local/share/applications/com.anthropic.Claude.desktop` | Your per-user entry with the XWayland flag |
+| `~/.local/share/claude-desktop-fedora/` | Install manifests, one per version |
 
 ---
 
-## Disclaimer
+## 📚 Sources
 
-Fedora is not a supported platform for Claude Desktop. This procedure installs an official, unmodified Anthropic package by hand and is offered as a community contribution. It carries no warranty, and it is not endorsed by Anthropic. Verify the package before installing it, and keep the manifest so you can reverse the installation cleanly.
+| Source | What it supports |
+|---|---|
+| [Claude Desktop on Linux (beta)](https://code.claude.com/docs/en/desktop-linux), Anthropic | Supported distributions, signing key fingerprint, package pool lookup, Cowork requirements, keyring troubleshooting and the Linux feature gaps |
+| [Claude Code setup: Linux package managers](https://code.claude.com/docs/en/setup#install-with-linux-package-managers), Anthropic | The CLI's signed apt, dnf and apk repositories |
+| [Download Claude](https://claude.ai/download), Anthropic | Platform availability and plan requirements |
+| [What's new in Fedora KDE Plasma Desktop 45](https://fedoramagazine.org/whats-new-in-fedora-kde-plasma-desktop-45/), Fedora Magazine | Plasma 6.8 as the desktop of Fedora 45 KDE |
+| [Fedora Linux 45 officially released](https://linuxiac.com/?p=222316), Linuxiac | Plasma 6.8.2 on Fedora 45 and the retirement of the X11 session |
+| [Fedora 45 now available](https://www.linux-magazine.com/Online/News/Fedora-45-Now-Available), Linux Magazine | Release contents, including the 7.2 kernel series |
+| [EX-11: Prepping for Plasma's last X11-supported release](https://blog.davidedmundson.co.uk/blog/596/), David Edmundson, KDE | Removal of the Plasma X11 session in 6.8, with X11 applications continuing through XWayland |
+| [T7265: `--keyring` ignored with `use-keyboxd`](https://dev.gnupg.org/T7265), GnuPG | Why `--keyring` no longer isolates keys, and the separate home directory alternative |
+| [claude-desktop-debian](https://github.com/aaddrick/claude-desktop-debian), community project | RPM, AppImage and Nix repackaging of the official Linux app |
+| [claude-desktop-debian v3.0.0 release notes](https://newreleases.io/project/github/aaddrick/claude-desktop-debian/release/v3.0.0%2Bclaude1.18286.0) | The rebase onto Anthropic's Linux app, the `claude-desktop-unofficial` name and the firmware compatibility link |
 
-Anthropic's documentation states that support for additional distributions is planned. When a native RPM arrives, migrate to it and remove this installation using the steps above.
+Observations attributed to the test machine come from commands run on it on 14 November 2026 and are recorded in [Validated configuration](#-validated-configuration).
 
-This is general information rather than professional advice, and the views here are the author's own rather than those of any employer or client. The procedure runs commands with elevated privileges, installs a setuid binary and writes into system paths. Read every command before you run it, and do not run it first on a machine you cannot afford to rebuild.
+---
+
+## ⚖️ Disclaimer
+
+Fedora is not a supported platform for Claude Desktop. This procedure installs an official, unmodified Anthropic package by hand and is offered as a community contribution. It carries no warranty and is not endorsed by Anthropic.
+
+Anthropic's documentation states that support for further distributions is planned. When an official RPM arrives, migrate to it and remove this installation using the steps above.
+
+This is general information, not professional advice, and the views here are the author's own and not those of any employer or client. The procedure runs commands with elevated privileges, installs a setuid binary and writes into system paths. Read every command before you run it, and do not try it first on a machine you cannot afford to rebuild.
 
 Full version: [DISCLAIMER.md](https://github.com/NeumannTechTips/neumanntechtips-resources/blob/main/DISCLAIMER.md)
 
 ---
 
-## More from NeumannTechTips
+## 🔗 Related repositories
 
-This guide comes out of the work behind **[NeumannTechTips](https://www.youtube.com/@NeumannTechTips)**, a channel on practical AI for people who have to make it work inside a real organisation.
+| Repository | Purpose |
+|---|---|
+| [`neumanntechtips-resources`](https://github.com/NeumannTechTips/neumanntechtips-resources) | Free prompt packs, checklists and reference material from the channel, licensed CC BY 4.0 |
+| [`ollama-podman-openwebui-fedora-kde-guide`](https://github.com/NeumannTechTips/ollama-podman-openwebui-fedora-kde-guide) | Ollama and Open WebUI under Podman on Fedora KDE Plasma, with NVIDIA GPU acceleration |
+| [`markitdown-mcp-guide`](https://github.com/NeumannTechTips/markitdown-mcp-guide) | Connecting Microsoft MarkItDown-MCP to any MCP-compatible AI client |
+| [`hermes-signal-hardening`](https://github.com/NeumannTechTips/hermes-signal-hardening) | Securing a self-hosted Hermes agent's Signal messaging gateway |
 
-- 📺 **[youtube.com/@NeumannTechTips](https://www.youtube.com/@NeumannTechTips)** · a new video every other Thursday
-- 📚 **[neumanntechtips-resources](https://github.com/NeumannTechTips/neumanntechtips-resources)** · free prompt packs and checklists, licensed CC BY 4.0, no sign up
+This guide comes out of the work behind **[NeumannTechTips](https://www.youtube.com/@NeumannTechTips)**, a channel on practical AI for people who have to make it work inside a real organisation. A new video goes out every other Thursday.
+
+---
+
+## 📄 Licence
+
+The text and commands in this guide are released under the [MIT Licence](LICENSE). Claude Desktop itself is Anthropic's software and remains subject to Anthropic's own terms. The NeumannTechTips logo files in `assets/` are brand assets and are not covered by the MIT Licence.
+
+---
+
+<div align="center">
+
+**Community installation guide · [NeumannTechTips](https://github.com/NeumannTechTips)**
+
+</div>
