@@ -122,7 +122,7 @@ Run every step from Konsole, in **one terminal session**. Later steps reuse shel
 
 ---
 
-## 🛠️ Installation
+## 🔧 Installation
 
 ### Step 1: Confirm your architecture
 
@@ -305,7 +305,7 @@ Sign in with your Anthropic account. Chat is available on every plan, including 
 
 ---
 
-## 🖥️ Running under Plasma 6.8
+## 💻 Running under Plasma 6.8
 
 Plasma 6.8 is Wayland-only. The X11 session has been removed from the login screen, and applications written for X11 now run through the XWayland compatibility layer. On Fedora 45, `echo $XDG_SESSION_TYPE` therefore prints `wayland` for every Plasma login.
 
@@ -381,7 +381,7 @@ Claude Desktop checks these requirements once, at launch, so restart it after an
 
 ---
 
-## ♻️ Updating
+## 🔄 Updating
 
 The desktop app does not update itself on Linux, and `dnf` does not know it exists. Check the index for a newer version whenever you like by repeating Steps 3 to 5. The newest version is printed after `Newest:`, and you can compare it with your latest manifest:
 
@@ -451,7 +451,7 @@ To roll back before step 9, quit the app, then run `sudo rm -rf /usr/lib/claude-
 
 ---
 
-## 🗑️ Removing
+## 🧹 Removing
 
 Your most recent manifest turns removal into an exact operation. Read it before using it, because it drives `rm` with `sudo`.
 
@@ -612,7 +612,7 @@ If the message disappears, that confirms the cause. Do not keep the flag. Withou
 
 ---
 
-## ⚠️ Known limitations
+## 🚧 Known limitations
 
 **From the Linux beta itself**, regardless of distribution:
 
@@ -639,7 +639,7 @@ If the message disappears, that confirms the cause. Do not keep the flag. Withou
 
 ---
 
-## 🏗️ Reference architecture
+## 📐 Reference architecture
 
 ![Reference architecture for the manual installation of Claude Desktop on Fedora 45 KDE Plasma, showing seven layers from upstream distribution through to Cowork virtualisation](claude-desktop-fedora-install-architecture.png)
 
@@ -708,7 +708,7 @@ Observations attributed to the test machine come from commands run on it on 14 N
 
 ---
 
-## ⚖️ Disclaimer
+## 📜 Disclaimer
 
 Fedora is not a supported platform for Claude Desktop. This procedure installs an official, unmodified Anthropic package by hand and is offered as a community contribution. It carries no warranty and is not endorsed by Anthropic.
 
