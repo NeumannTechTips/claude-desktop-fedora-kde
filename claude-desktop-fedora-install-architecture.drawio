@@ -1,380 +1,487 @@
 <mxfile host="app.diagrams.net">
   <diagram id="claude-fedora-install-boardpack" name="Install Reference Architecture">
-    <mxGraphModel dx="1101" dy="1056" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1240" math="0" shadow="0">
+    <mxGraphModel dx="4081" dy="1653" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3100" pageHeight="1930" math="0" shadow="0" adaptiveColors="auto">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="title" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=17;fontStyle=1;fontFamily=Helvetica;" value="Claude Desktop on Fedora 45 KDE Plasma: Manual Installation Reference Architecture" vertex="1">
-          <mxGeometry height="28" width="1100" x="40" y="38" as="geometry" />
+        <mxCell id="title" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#D7191C;strokeColor=#D7191C;fontColor=#FFFFFF;fontSize=20;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="Claude Desktop on Fedora 45 KDE Plasma: Installation Reference Architecture" vertex="1">
+          <mxGeometry height="50" width="3060" x="20" y="20" as="geometry" />
         </mxCell>
-        <mxCell id="cap0" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontSize=13;fontStyle=1;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=12;" value="1. Upstream Distribution&#xa;(Anthropic)" vertex="1">
-          <mxGeometry height="60" width="200" x="40" y="112" as="geometry" />
+        <mxCell id="frameL" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#D7191C;strokeColor=none;shadow=1;textShadow=1;" value="" vertex="1">
+          <mxGeometry height="1840" width="10" x="20" y="70" as="geometry" />
         </mxCell>
-        <mxCell id="n1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6C8EBF;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="APT Repository&#xa;downloads.claude.ai" vertex="1">
-          <mxGeometry height="60" width="240" x="280" y="112" as="geometry" />
+        <mxCell id="frameR" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#D7191C;strokeColor=none;shadow=1;textShadow=1;" value="" vertex="1">
+          <mxGeometry height="1840" width="10" x="3070" y="70" as="geometry" />
         </mxCell>
-        <mxCell id="n2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6C8EBF;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="Signed Repository Index&#xa;InRelease and Packages" vertex="1">
-          <mxGeometry height="60" width="240" x="580" y="112" as="geometry" />
+        <mxCell id="frameB" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#D7191C;strokeColor=none;shadow=1;textShadow=1;" value="" vertex="1">
+          <mxGeometry height="10" width="3060" x="20" y="1900" as="geometry" />
         </mxCell>
-        <mxCell id="n3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6C8EBF;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="Detached Signing Key&#xa;key.asc" vertex="1">
-          <mxGeometry height="60" width="240" x="880" y="112" as="geometry" />
+        <mxCell id="band" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;container=1;collapsible=0;fillColor=#D5EBA8;strokeColor=#7FA650;strokeWidth=1.5;shadow=1;fontColor=#1B2A33;fontSize=13;fontStyle=1;align=left;verticalAlign=top;spacingLeft=20;spacingTop=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="2. Integrity chain: every link verified before anything is installed, on every install and update" vertex="1">
+          <mxGeometry height="200" width="2620" x="420" y="110" as="geometry" />
         </mxCell>
-        <mxCell id="cap1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;fontSize=13;fontStyle=1;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=12;" value="2. Acquisition and&#xa;Integrity Verification" vertex="1">
-          <mxGeometry height="60" width="200" x="40" y="277" as="geometry" />
+        <mxCell id="c01" parent="band" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#DFF0EC;strokeColor=#0B3D5C;strokeWidth=2.5;shadow=1;fontColor=#1B2A33;fontSize=12;align=left;verticalAlign=top;spacing=10;spacingTop=6;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="&lt;b&gt;Key fingerprint check&lt;/b&gt;&lt;br&gt;&lt;br&gt;gpg --show-keys must print 31DD DE24 ... 1A7E CACE, or stop." vertex="1">
+          <mxGeometry height="110" width="260" x="30" y="60" as="geometry" />
         </mxCell>
-        <mxCell id="n4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82B366;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="Package Download&#xa;newest version from the index" vertex="1">
-          <mxGeometry height="60" width="240" x="280" y="277" as="geometry" />
+        <mxCell id="b01" parent="band" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#0B3D5C;strokeColor=#FFFFFF;strokeWidth=2;shadow=1;fontColor=#FFFFFF;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="01" vertex="1">
+          <mxGeometry height="30" width="30" x="260" y="40" as="geometry" />
         </mxCell>
-        <mxCell id="n5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82B366;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="SHA-256 Comparison&#xa;against published digest" vertex="1">
-          <mxGeometry height="60" width="240" x="580" y="277" as="geometry" />
+        <mxCell id="c02" parent="band" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#DFF0EC;strokeColor=#0B3D5C;strokeWidth=2.5;shadow=1;fontColor=#1B2A33;fontSize=12;align=left;verticalAlign=top;spacing=10;spacingTop=6;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="&lt;b&gt;InRelease signature check&lt;/b&gt;&lt;br&gt;&lt;br&gt;gpg --verify in a temporary GNUPGHOME; expect a good signature." vertex="1">
+          <mxGeometry height="110" width="260" x="490" y="60" as="geometry" />
         </mxCell>
-        <mxCell id="n6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82B366;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="Key Fingerprint Check&#xa;31DD DE24 ... 1A7E CACE" vertex="1">
-          <mxGeometry height="60" width="240" x="880" y="277" as="geometry" />
+        <mxCell id="b02" parent="band" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#0B3D5C;strokeColor=#FFFFFF;strokeWidth=2;shadow=1;fontColor=#FFFFFF;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="02" vertex="1">
+          <mxGeometry height="30" width="30" x="720" y="40" as="geometry" />
         </mxCell>
-        <mxCell id="cap2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;fontSize=13;fontStyle=1;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=12;" value="3. Staging and Extraction" vertex="1">
-          <mxGeometry height="60" width="200" x="40" y="442" as="geometry" />
+        <mxCell id="c03" parent="band" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#DFF0EC;strokeColor=#0B3D5C;strokeWidth=2.5;shadow=1;fontColor=#1B2A33;fontSize=12;align=left;verticalAlign=top;spacing=10;spacingTop=6;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="&lt;b&gt;Index hash check&lt;/b&gt;&lt;br&gt;&lt;br&gt;The SHA-256 of Packages must appear in the signed InRelease." vertex="1">
+          <mxGeometry height="110" width="260" x="950" y="60" as="geometry" />
         </mxCell>
-        <mxCell id="n7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D6B656;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="Archive Extraction&#xa;sudo dpkg-deb -x" vertex="1">
-          <mxGeometry height="60" width="240" x="280" y="442" as="geometry" />
+        <mxCell id="b03" parent="band" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#0B3D5C;strokeColor=#FFFFFF;strokeWidth=2;shadow=1;fontColor=#FFFFFF;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="03" vertex="1">
+          <mxGeometry height="30" width="30" x="1180" y="40" as="geometry" />
         </mxCell>
-        <mxCell id="n8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D6B656;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="Fresh Staging Folder&#xa;/var/tmp, empty per release" vertex="1">
-          <mxGeometry height="60" width="240" x="580" y="442" as="geometry" />
+        <mxCell id="c04" parent="band" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#DFF0EC;strokeColor=#0B3D5C;strokeWidth=2.5;shadow=1;fontColor=#1B2A33;fontSize=12;align=left;verticalAlign=top;spacing=10;spacingTop=6;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="&lt;b&gt;Package SHA-256 check&lt;/b&gt;&lt;br&gt;&lt;br&gt;Newest version from the verified index; sha256sum -c prints OK." vertex="1">
+          <mxGeometry height="110" width="260" x="1410" y="60" as="geometry" />
         </mxCell>
-        <mxCell id="n9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D6B656;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="Install Manifest&#xa;one file per version, kept&#xa;in ~/.local/share" vertex="1">
-          <mxGeometry height="60" width="240" x="880" y="442" as="geometry" />
+        <mxCell id="b04" parent="band" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#0B3D5C;strokeColor=#FFFFFF;strokeWidth=2;shadow=1;fontColor=#FFFFFF;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="04" vertex="1">
+          <mxGeometry height="30" width="30" x="1640" y="40" as="geometry" />
         </mxCell>
-        <mxCell id="cap3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E1D5E7;strokeColor=#9673A6;fontSize=13;fontStyle=1;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=12;" value="4. Target Filesystem (/usr)" vertex="1">
-          <mxGeometry height="60" width="200" x="40" y="607" as="geometry" />
-        </mxCell>
-        <mxCell id="n10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9673A6;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="/usr/lib/claude-desktop&#xa;Electron runtime payload" vertex="1">
-          <mxGeometry height="60" width="240" x="280" y="607" as="geometry" />
-        </mxCell>
-        <mxCell id="n11" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9673A6;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="/usr/bin/claude-desktop&#xa;symlink on system PATH" vertex="1">
-          <mxGeometry height="60" width="240" x="580" y="607" as="geometry" />
-        </mxCell>
-        <mxCell id="n12" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9673A6;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="/usr/share&#xa;desktop entry, icons, MIME types" vertex="1">
-          <mxGeometry height="60" width="240" x="880" y="607" as="geometry" />
-        </mxCell>
-        <mxCell id="cap4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;fontSize=13;fontStyle=1;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=12;" value="5. Hardening and&#xa;Desktop Integration" vertex="1">
-          <mxGeometry height="60" width="200" x="40" y="772" as="geometry" />
-        </mxCell>
-        <mxCell id="n13" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B85450;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="chrome-sandbox&#xa;setuid root 4755, SELinux lib_t" vertex="1">
-          <mxGeometry height="60" width="240" x="280" y="772" as="geometry" />
-        </mxCell>
-        <mxCell id="n14" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B85450;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="Command Resolution&#xa;/usr/bin already on PATH" vertex="1">
-          <mxGeometry height="60" width="240" x="580" y="772" as="geometry" />
-        </mxCell>
-        <mxCell id="n15" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B85450;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="Plasma Menu Cache&#xa;kbuildsycoca6 rebuild" vertex="1">
-          <mxGeometry height="60" width="240" x="880" y="772" as="geometry" />
-        </mxCell>
-        <mxCell id="cap5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#666666;fontSize=13;fontStyle=1;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=12;" value="6. Lifecycle and&#xa;Control Plane" vertex="1">
-          <mxGeometry height="60" width="200" x="40" y="937" as="geometry" />
-        </mxCell>
-        <mxCell id="n16" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="Move-Aside Update&#xa;rollback copy until verified" vertex="1">
-          <mxGeometry height="60" width="240" x="280" y="937" as="geometry" />
-        </mxCell>
-        <mxCell id="n17" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="Runtime Verification&#xa;launch and sign-in" vertex="1">
-          <mxGeometry height="60" width="240" x="580" y="937" as="geometry" />
-        </mxCell>
-        <mxCell id="n18" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="Manifest-Driven Removal&#xa;no dnf ownership" vertex="1">
-          <mxGeometry height="60" width="240" x="880" y="937" as="geometry" />
-        </mxCell>
-        <mxCell id="cap6" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#B0E3E6;strokeColor=#0E8088;fontSize=13;fontStyle=1;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=12;" value="7. Cowork Virtualisation&#xa;(optional)" vertex="1">
-          <mxGeometry height="60" width="200" x="40" y="1102" as="geometry" />
-        </mxCell>
-        <mxCell id="n19" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0E8088;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="Requirement Check&#xa;KVM, kvm group, QEMU, firmware" vertex="1">
-          <mxGeometry height="60" width="240" x="280" y="1102" as="geometry" />
-        </mxCell>
-        <mxCell id="n20" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0E8088;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="QEMU/KVM Virtual Machine&#xa;qemu-system-x86-core, edk2-ovmf" vertex="1">
-          <mxGeometry height="60" width="240" x="580" y="1102" as="geometry" />
-        </mxCell>
-        <mxCell id="n21" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0E8088;strokeWidth=2;fontSize=12;fontFamily=Helvetica;verticalAlign=middle;align=center;" value="Host-Guest Channels&#xa;vhost-vsock, bundled virtiofsd" vertex="1">
-          <mxGeometry height="60" width="240" x="880" y="1102" as="geometry" />
-        </mxCell>
-        <mxCell id="eF1" edge="1" parent="1" source="n1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jumpStyle=arc;jumpSize=10;html=1;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;strokeColor=#6C8EBF;dashed=0;" target="n4" value="F1">
+        <mxCell id="e02" edge="1" parent="band" source="c01" style="edgeStyle=orthogonalEdgeStyle;libavoidRouting=1;rounded=0;jumpStyle=arc;jumpSize=10;html=1;jettySize=auto;orthogonalLoop=1;strokeWidth=2;endArrow=blockThin;endFill=1;strokeColor=#0B3D5C;fontColor=#0B3D5C;fontSize=11;fontStyle=1;labelBackgroundColor=#FFFFFF;labelPlacement=auto;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;dashed=1;dashPattern=8 6;verticalAlign=bottom;shadow=1;textShadow=1;" target="c02" value="trusts the key">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="eF2" edge="1" parent="1" source="n2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jumpStyle=arc;jumpSize=10;html=1;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;strokeColor=#6C8EBF;dashed=1;dashPattern=1 4;" target="n5" value="F2">
+        <mxCell id="e03" edge="1" parent="band" source="c02" style="edgeStyle=orthogonalEdgeStyle;libavoidRouting=1;rounded=0;jumpStyle=arc;jumpSize=10;html=1;jettySize=auto;orthogonalLoop=1;strokeWidth=2;endArrow=blockThin;endFill=1;strokeColor=#0B3D5C;fontColor=#0B3D5C;fontSize=11;fontStyle=1;labelBackgroundColor=#FFFFFF;labelPlacement=auto;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;dashed=1;dashPattern=8 6;verticalAlign=bottom;shadow=1;textShadow=1;" target="c03" value="trusts the hash list">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="eF3" edge="1" parent="1" source="n3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jumpStyle=arc;jumpSize=10;html=1;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;strokeColor=#6C8EBF;dashed=0;" target="n6" value="F3">
+        <mxCell id="e04" edge="1" parent="band" source="c03" style="edgeStyle=orthogonalEdgeStyle;libavoidRouting=1;rounded=0;jumpStyle=arc;jumpSize=10;html=1;jettySize=auto;orthogonalLoop=1;strokeWidth=2;endArrow=blockThin;endFill=1;strokeColor=#0B3D5C;fontColor=#0B3D5C;fontSize=11;fontStyle=1;labelBackgroundColor=#FFFFFF;labelPlacement=auto;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;dashed=1;dashPattern=8 6;verticalAlign=bottom;shadow=1;textShadow=1;" target="c04" value="trusts the digest">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="eF4" edge="1" parent="1" source="n4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jumpStyle=arc;jumpSize=10;html=1;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;strokeColor=#82B366;dashed=1;dashPattern=1 4;" target="n7" value="F4">
+        <mxCell id="grpB" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;container=1;collapsible=0;fillColor=#FFF2CC;strokeColor=#D6B656;strokeWidth=1.5;shadow=1;fontColor=#1B2A33;fontSize=13;fontStyle=1;align=left;verticalAlign=top;spacingLeft=20;spacingTop=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="1. Upstream distribution (Anthropic)" vertex="1">
+          <mxGeometry height="710" width="320" x="420" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="c06" parent="grpB" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F5813A;strokeWidth=2.5;dashed=1;dashPattern=8 6;shadow=1;fontColor=#1B2A33;fontSize=12;align=left;verticalAlign=top;spacing=10;spacingTop=6;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="&lt;b&gt;Signing key&lt;/b&gt;&lt;br&gt;&lt;br&gt;key.asc from downloads.claude.ai." vertex="1">
+          <mxGeometry height="110" width="260" x="30" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="b06" parent="grpB" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#F5813A;strokeColor=#FFFFFF;strokeWidth=2;shadow=1;fontColor=#FFFFFF;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="06" vertex="1">
+          <mxGeometry height="30" width="30" x="260" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="c07" parent="grpB" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F5813A;strokeWidth=2.5;dashed=1;dashPattern=8 6;shadow=1;fontColor=#1B2A33;fontSize=12;align=left;verticalAlign=top;spacing=10;spacingTop=6;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="&lt;b&gt;Signed release file&lt;/b&gt;&lt;br&gt;&lt;br&gt;dists/stable/InRelease lists the hash of each index." vertex="1">
+          <mxGeometry height="110" width="260" x="30" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="b07" parent="grpB" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#F5813A;strokeColor=#FFFFFF;strokeWidth=2;shadow=1;fontColor=#FFFFFF;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="07" vertex="1">
+          <mxGeometry height="30" width="30" x="260" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="c08" parent="grpB" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F5813A;strokeWidth=2.5;dashed=1;dashPattern=8 6;shadow=1;fontColor=#1B2A33;fontSize=12;align=left;verticalAlign=top;spacing=10;spacingTop=6;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="&lt;b&gt;Package index&lt;/b&gt;&lt;br&gt;&lt;br&gt;Packages: version, filename and SHA-256 of every .deb." vertex="1">
+          <mxGeometry height="110" width="260" x="30" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="b08" parent="grpB" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#F5813A;strokeColor=#FFFFFF;strokeWidth=2;shadow=1;fontColor=#FFFFFF;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="08" vertex="1">
+          <mxGeometry height="30" width="30" x="260" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="c09" parent="grpB" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F5813A;strokeWidth=2.5;dashed=1;dashPattern=8 6;shadow=1;fontColor=#1B2A33;fontSize=12;align=left;verticalAlign=top;spacing=10;spacingTop=6;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="&lt;b&gt;Package pool&lt;/b&gt;&lt;br&gt;&lt;br&gt;The claude-desktop .deb that the index names." vertex="1">
+          <mxGeometry height="110" width="260" x="30" y="570" as="geometry" />
+        </mxCell>
+        <mxCell id="b09" parent="grpB" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#F5813A;strokeColor=#FFFFFF;strokeWidth=2;shadow=1;fontColor=#FFFFFF;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="09" vertex="1">
+          <mxGeometry height="30" width="30" x="260" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="grpC" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;container=1;collapsible=0;fillColor=#DCE9F7;strokeColor=#6C8EBF;strokeWidth=1.5;shadow=1;fontColor=#1B2A33;fontSize=13;fontStyle=1;align=left;verticalAlign=top;spacingLeft=20;spacingTop=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="3. Staging and extraction" vertex="1">
+          <mxGeometry height="710" width="320" x="880" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="c10" parent="grpC" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#6B7C8C;strokeWidth=2.5;dashed=1;dashPattern=8 6;shadow=1;fontColor=#1B2A33;fontSize=12;align=left;verticalAlign=top;spacing=10;spacingTop=6;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="&lt;b&gt;Fresh staging folder&lt;/b&gt;&lt;br&gt;&lt;br&gt;sudo mktemp -d in /var/tmp, new and empty per release." vertex="1">
+          <mxGeometry height="110" width="260" x="30" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="b10" parent="grpC" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#6B7C8C;strokeColor=#FFFFFF;strokeWidth=2;shadow=1;fontColor=#FFFFFF;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="10" vertex="1">
+          <mxGeometry height="30" width="30" x="260" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="c11" parent="grpC" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#1F7A8C;strokeWidth=2.5;shadow=1;fontColor=#1B2A33;fontSize=12;align=left;verticalAlign=top;spacing=10;spacingTop=6;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="&lt;b&gt;Archive extraction&lt;/b&gt;&lt;br&gt;&lt;br&gt;sudo dpkg-deb -x keeps ownership and the setuid bit." vertex="1">
+          <mxGeometry height="110" width="260" x="30" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="b11" parent="grpC" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#1F7A8C;strokeColor=#FFFFFF;strokeWidth=2;shadow=1;fontColor=#FFFFFF;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="11" vertex="1">
+          <mxGeometry height="30" width="30" x="260" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="c12" parent="grpC" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=14;whiteSpace=wrap;html=1;fillColor=#DFF0EC;strokeColor=#0B3D5C;strokeWidth=2.5;shadow=1;fontColor=#1B2A33;fontSize=12;align=center;verticalAlign=middle;spacing=10;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="&lt;b&gt;Install manifest&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#0B3D5C&quot;&gt;installed-files-$VER.txt&lt;/font&gt;&lt;br&gt;&lt;br&gt;File paths, one manifest per version" vertex="1">
+          <mxGeometry height="110" width="260" x="30" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="b12" parent="grpC" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#0B3D5C;strokeColor=#FFFFFF;strokeWidth=2;shadow=1;fontColor=#FFFFFF;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="12" vertex="1">
+          <mxGeometry height="30" width="30" x="260" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="e07" edge="1" parent="grpC" source="c10" style="edgeStyle=orthogonalEdgeStyle;libavoidRouting=1;rounded=0;jumpStyle=arc;jumpSize=10;html=1;jettySize=auto;orthogonalLoop=1;strokeWidth=2;endArrow=blockThin;endFill=1;strokeColor=#6B7C8C;fontColor=#6B7C8C;fontSize=11;fontStyle=1;labelBackgroundColor=#FFFFFF;labelPlacement=auto;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;dashed=1;dashPattern=8 6;shadow=1;textShadow=1;" target="c11" value="empty target">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="eF5" edge="1" parent="1" source="n5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jumpStyle=arc;jumpSize=10;html=1;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;strokeColor=#82B366;dashed=0;" target="n8" value="F5">
+        <mxCell id="e08" edge="1" parent="grpC" source="c11" style="edgeStyle=orthogonalEdgeStyle;libavoidRouting=1;rounded=0;jumpStyle=arc;jumpSize=10;html=1;jettySize=auto;orthogonalLoop=1;strokeWidth=2;endArrow=blockThin;endFill=1;strokeColor=#1F7A8C;fontColor=#1F7A8C;fontSize=11;fontStyle=1;labelBackgroundColor=#FFFFFF;labelPlacement=auto;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;dashed=1;dashPattern=8 6;shadow=1;textShadow=1;" target="c12" value="lists every file">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="eF6" edge="1" parent="1" source="n6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jumpStyle=arc;jumpSize=10;html=1;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;dashed=1;dashPattern=8 8;strokeColor=#666666;" target="n9" value="F6">
+        <mxCell id="grpD" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;container=1;collapsible=0;fillColor=#F8CECC;strokeColor=#B85450;strokeWidth=1.5;shadow=1;fontColor=#1B2A33;fontSize=13;fontStyle=1;align=left;verticalAlign=top;spacingLeft=20;spacingTop=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="4. Target filesystem (/usr)" vertex="1">
+          <mxGeometry height="710" width="320" x="1340" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="c13" parent="grpD" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=14;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#1F5FBF;strokeWidth=2.5;shadow=1;fontColor=#1B2A33;fontSize=12;align=center;verticalAlign=middle;spacing=10;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="&lt;b&gt;/usr/lib/claude-desktop&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#1F5FBF&quot;&gt;ELECTRON RUNTIME&lt;/font&gt;&lt;br&gt;&lt;br&gt;chrome-sandbox setuid root, 4755" vertex="1">
+          <mxGeometry height="110" width="260" x="30" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="b13" parent="grpD" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#1F5FBF;strokeColor=#FFFFFF;strokeWidth=2;shadow=1;fontColor=#FFFFFF;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="13" vertex="1">
+          <mxGeometry height="30" width="30" x="260" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="c14" parent="grpD" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#1F5FBF;strokeWidth=2.5;shadow=1;fontColor=#1B2A33;fontSize=12;align=left;verticalAlign=top;spacing=10;spacingTop=6;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="&lt;b&gt;/usr/bin/claude-desktop&lt;/b&gt;&lt;br&gt;&lt;br&gt;Symbolic link into ../lib/claude-desktop, already on PATH." vertex="1">
+          <mxGeometry height="110" width="260" x="30" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="b14" parent="grpD" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#1F5FBF;strokeColor=#FFFFFF;strokeWidth=2;shadow=1;fontColor=#FFFFFF;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="14" vertex="1">
+          <mxGeometry height="30" width="30" x="260" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="c15" parent="grpD" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=14;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#1F5FBF;strokeWidth=2.5;shadow=1;fontColor=#1B2A33;fontSize=12;align=center;verticalAlign=middle;spacing=10;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="&lt;b&gt;/usr/share&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#1F5FBF&quot;&gt;DESKTOP ASSETS&lt;/font&gt;&lt;br&gt;&lt;br&gt;Desktop entry, icons, MIME definition" vertex="1">
+          <mxGeometry height="110" width="260" x="30" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="b15" parent="grpD" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#1F5FBF;strokeColor=#FFFFFF;strokeWidth=2;shadow=1;fontColor=#FFFFFF;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="15" vertex="1">
+          <mxGeometry height="30" width="30" x="260" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="grpE" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;container=1;collapsible=0;fillColor=#E6DCF0;strokeColor=#9673A6;strokeWidth=1.5;shadow=1;fontColor=#1B2A33;fontSize=13;fontStyle=1;align=left;verticalAlign=top;spacingLeft=20;spacingTop=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="5. Hardening and desktop integration" vertex="1">
+          <mxGeometry height="710" width="320" x="1800" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="c16" parent="grpE" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#1F7A8C;strokeWidth=2.5;shadow=1;fontColor=#1B2A33;fontSize=12;align=left;verticalAlign=top;spacing=10;spacingTop=6;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="&lt;b&gt;SELinux relabel&lt;/b&gt;&lt;br&gt;&lt;br&gt;restorecon on /usr/lib and every manifest path; sandbox gets lib_t." vertex="1">
+          <mxGeometry height="110" width="260" x="30" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="b16" parent="grpE" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#1F7A8C;strokeColor=#FFFFFF;strokeWidth=2;shadow=1;fontColor=#FFFFFF;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="16" vertex="1">
+          <mxGeometry height="30" width="30" x="260" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="c17" parent="grpE" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#1F7A8C;strokeWidth=2.5;shadow=1;fontColor=#1B2A33;fontSize=12;align=left;verticalAlign=top;spacing=10;spacingTop=6;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="&lt;b&gt;MIME registration&lt;/b&gt;&lt;br&gt;&lt;br&gt;install and update-mime-database: opens .mcpb, .dxt, .skill." vertex="1">
+          <mxGeometry height="110" width="260" x="30" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="b17" parent="grpE" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#1F7A8C;strokeColor=#FFFFFF;strokeWidth=2;shadow=1;fontColor=#FFFFFF;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="17" vertex="1">
+          <mxGeometry height="30" width="30" x="260" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="c18" parent="grpE" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#5B4B8A;strokeWidth=2.5;shadow=1;fontColor=#1B2A33;fontSize=12;align=left;verticalAlign=top;spacing=10;spacingTop=6;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="&lt;b&gt;XWayland desktop entry&lt;/b&gt;&lt;br&gt;&lt;br&gt;Per-user copy; every Exec line adds --ozone-platform=x11." vertex="1">
+          <mxGeometry height="110" width="260" x="30" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="b18" parent="grpE" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#5B4B8A;strokeColor=#FFFFFF;strokeWidth=2;shadow=1;fontColor=#FFFFFF;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="18" vertex="1">
+          <mxGeometry height="30" width="30" x="260" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="c19" parent="grpE" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#1F7A8C;strokeWidth=2.5;shadow=1;fontColor=#1B2A33;fontSize=12;align=left;verticalAlign=top;spacing=10;spacingTop=6;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="&lt;b&gt;Desktop and menu caches&lt;/b&gt;&lt;br&gt;&lt;br&gt;update-desktop-database, icon cache and kbuildsycoca6." vertex="1">
+          <mxGeometry height="110" width="260" x="30" y="570" as="geometry" />
+        </mxCell>
+        <mxCell id="b19" parent="grpE" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#1F7A8C;strokeColor=#FFFFFF;strokeWidth=2;shadow=1;fontColor=#FFFFFF;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="19" vertex="1">
+          <mxGeometry height="30" width="30" x="260" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" edge="1" parent="grpE" source="c18" style="edgeStyle=orthogonalEdgeStyle;libavoidRouting=1;rounded=0;jumpStyle=arc;jumpSize=10;html=1;jettySize=auto;orthogonalLoop=1;strokeWidth=2;endArrow=blockThin;endFill=1;strokeColor=#5B4B8A;fontColor=#5B4B8A;fontSize=11;fontStyle=1;labelBackgroundColor=#FFFFFF;labelPlacement=auto;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;dashed=0;shadow=1;textShadow=1;" target="c19" value="rebuilds the menu">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="eF7" edge="1" parent="1" source="n7" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jumpStyle=arc;jumpSize=10;html=1;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;strokeColor=#D6B656;dashed=1;dashPattern=1 4;" target="n10" value="F7">
+        <mxCell id="grpF" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;container=1;collapsible=0;fillColor=#EEEEEE;strokeColor=#8C8C8C;strokeWidth=1.5;shadow=1;fontColor=#1B2A33;fontSize=13;fontStyle=1;align=left;verticalAlign=top;spacingLeft=20;spacingTop=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="6. Lifecycle and control" vertex="1">
+          <mxGeometry height="710" width="320" x="2260" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="c20" parent="grpF" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#1F7A8C;strokeWidth=2.5;shadow=1;fontColor=#1B2A33;fontSize=12;align=left;verticalAlign=top;spacing=10;spacingTop=6;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="&lt;b&gt;Move-aside update&lt;/b&gt;&lt;br&gt;&lt;br&gt;Repeat the verified install; the current version is moved aside." vertex="1">
+          <mxGeometry height="110" width="260" x="30" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="b20" parent="grpF" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#1F7A8C;strokeColor=#FFFFFF;strokeWidth=2;shadow=1;fontColor=#FFFFFF;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="20" vertex="1">
+          <mxGeometry height="30" width="30" x="260" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="c21" parent="grpF" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=14;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#6B7C8C;strokeWidth=2.5;dashed=1;dashPattern=8 6;shadow=1;fontColor=#1B2A33;fontSize=12;align=center;verticalAlign=middle;spacing=10;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="&lt;b&gt;Rollback copy&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#6B7C8C&quot;&gt;/usr/lib/claude-desktop.prev&lt;/font&gt;&lt;br&gt;&lt;br&gt;Delete once the new version works" vertex="1">
+          <mxGeometry height="110" width="260" x="30" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="b21" parent="grpF" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#6B7C8C;strokeColor=#FFFFFF;strokeWidth=2;shadow=1;fontColor=#FFFFFF;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="21" vertex="1">
+          <mxGeometry height="30" width="30" x="260" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="c22" parent="grpF" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#1F7A8C;strokeWidth=2.5;shadow=1;fontColor=#1B2A33;fontSize=12;align=left;verticalAlign=top;spacing=10;spacingTop=6;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="&lt;b&gt;Runtime verification&lt;/b&gt;&lt;br&gt;&lt;br&gt;Launch from the menu and sign in; runs as an XWayland client." vertex="1">
+          <mxGeometry height="110" width="260" x="30" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="b22" parent="grpF" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#1F7A8C;strokeColor=#FFFFFF;strokeWidth=2;shadow=1;fontColor=#FFFFFF;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="22" vertex="1">
+          <mxGeometry height="30" width="30" x="260" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="c23" parent="grpF" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#DFF0EC;strokeColor=#0B3D5C;strokeWidth=2.5;shadow=1;fontColor=#1B2A33;fontSize=12;align=left;verticalAlign=top;spacing=10;spacingTop=6;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="&lt;b&gt;Manifest-driven removal&lt;/b&gt;&lt;br&gt;&lt;br&gt;xargs -a the newest manifest, sudo rm; dnf does not own these files." vertex="1">
+          <mxGeometry height="110" width="260" x="30" y="570" as="geometry" />
+        </mxCell>
+        <mxCell id="b23" parent="grpF" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#0B3D5C;strokeColor=#FFFFFF;strokeWidth=2;shadow=1;fontColor=#FFFFFF;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="23" vertex="1">
+          <mxGeometry height="30" width="30" x="260" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="e14" edge="1" parent="grpF" source="c20" style="edgeStyle=orthogonalEdgeStyle;libavoidRouting=1;rounded=0;jumpStyle=arc;jumpSize=10;html=1;jettySize=auto;orthogonalLoop=1;strokeWidth=2;endArrow=blockThin;endFill=1;strokeColor=#1F7A8C;fontColor=#1F7A8C;fontSize=11;fontStyle=1;labelBackgroundColor=#FFFFFF;labelPlacement=auto;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;dashed=0;shadow=1;textShadow=1;" target="c21" value="keeps old version">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="eF8" edge="1" parent="1" source="n8" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jumpStyle=arc;jumpSize=10;html=1;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;strokeColor=#D6B656;dashed=0;" target="n11" value="F8">
+        <mxCell id="grpG" parent="1" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;container=1;collapsible=0;fillColor=#D4EEF0;strokeColor=#4FA3A8;strokeWidth=1.5;shadow=1;fontColor=#1B2A33;fontSize=13;fontStyle=1;align=left;verticalAlign=top;spacingLeft=20;spacingTop=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="7. Cowork virtualisation (optional)" vertex="1">
+          <mxGeometry height="710" width="320" x="2720" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="c24" parent="grpG" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#1F7A8C;strokeWidth=2.5;shadow=1;fontColor=#1B2A33;fontSize=12;align=left;verticalAlign=top;spacing=10;spacingTop=6;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="&lt;b&gt;Requirement check&lt;/b&gt;&lt;br&gt;&lt;br&gt;KVM, kvm group, QEMU, firmware, vhost_vsock." vertex="1">
+          <mxGeometry height="110" width="260" x="30" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="b24" parent="grpG" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#1F7A8C;strokeColor=#FFFFFF;strokeWidth=2;shadow=1;fontColor=#FFFFFF;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="24" vertex="1">
+          <mxGeometry height="30" width="30" x="260" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="c25" parent="grpG" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#1F7A8C;strokeWidth=2.5;shadow=1;fontColor=#1B2A33;fontSize=12;align=left;verticalAlign=top;spacing=10;spacingTop=6;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="&lt;b&gt;QEMU/KVM virtual machine&lt;/b&gt;&lt;br&gt;&lt;br&gt;qemu-system-x86-core with edk2-ovmf firmware." vertex="1">
+          <mxGeometry height="110" width="260" x="30" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="b25" parent="grpG" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#1F7A8C;strokeColor=#FFFFFF;strokeWidth=2;shadow=1;fontColor=#FFFFFF;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="25" vertex="1">
+          <mxGeometry height="30" width="30" x="260" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="c26" parent="grpG" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#1F7A8C;strokeWidth=2.5;shadow=1;fontColor=#1B2A33;fontSize=12;align=left;verticalAlign=top;spacing=10;spacingTop=6;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="&lt;b&gt;Host-guest channels&lt;/b&gt;&lt;br&gt;&lt;br&gt;vhost-vsock and the bundled virtiofsd." vertex="1">
+          <mxGeometry height="110" width="260" x="30" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="b26" parent="grpG" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#1F7A8C;strokeColor=#FFFFFF;strokeWidth=2;shadow=1;fontColor=#FFFFFF;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="26" vertex="1">
+          <mxGeometry height="30" width="30" x="260" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="e17" edge="1" parent="grpG" source="c24" style="edgeStyle=orthogonalEdgeStyle;libavoidRouting=1;rounded=0;jumpStyle=arc;jumpSize=10;html=1;jettySize=auto;orthogonalLoop=1;strokeWidth=2;endArrow=blockThin;endFill=1;strokeColor=#1F7A8C;fontColor=#1F7A8C;fontSize=11;fontStyle=1;labelBackgroundColor=#FFFFFF;labelPlacement=auto;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;dashed=0;shadow=1;textShadow=1;" target="c25" value="starts the VM">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="eF9" edge="1" parent="1" source="n9" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jumpStyle=arc;jumpSize=10;html=1;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;strokeColor=#D6B656;dashed=1;dashPattern=1 4;" target="n12" value="F9">
+        <mxCell id="e18" edge="1" parent="grpG" source="c25" style="edgeStyle=orthogonalEdgeStyle;libavoidRouting=1;rounded=0;jumpStyle=arc;jumpSize=10;html=1;jettySize=auto;orthogonalLoop=1;strokeWidth=2;endArrow=blockThin;endFill=1;strokeColor=#1F7A8C;fontColor=#1F7A8C;fontSize=11;fontStyle=1;labelBackgroundColor=#FFFFFF;labelPlacement=auto;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;dashed=0;shadow=1;textShadow=1;" target="c26" value="shares folders">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="eF10" edge="1" parent="1" source="n10" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jumpStyle=arc;jumpSize=10;html=1;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;strokeColor=#9673A6;dashed=0;" target="n13" value="F10">
+        <mxCell id="c05" parent="1" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#FFE4D1;strokeColor=#E4A11B;strokeWidth=2.5;shadow=1;fontColor=#1B2A33;fontSize=12;align=left;verticalAlign=top;spacing=10;spacingTop=6;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="&lt;b&gt;You, at Konsole&lt;/b&gt;&lt;br&gt;&lt;br&gt;Run each step by hand, with sudo where the step needs it." vertex="1">
+          <mxGeometry height="110" width="220" x="60" y="680" as="geometry" />
+        </mxCell>
+        <mxCell id="b05" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#E4A11B;strokeColor=#FFFFFF;strokeWidth=2;shadow=1;fontColor=#FFFFFF;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;textShadow=1;" value="05" vertex="1">
+          <mxGeometry height="30" width="30" x="250" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="e01" edge="1" parent="1" source="band" style="edgeStyle=orthogonalEdgeStyle;rounded=0;jumpStyle=arc;jumpSize=10;html=1;jettySize=auto;orthogonalLoop=1;strokeWidth=2;endArrow=blockThin;endFill=1;strokeColor=#0B3D5C;fontColor=#0B3D5C;fontSize=11;fontStyle=1;labelBackgroundColor=#FFFFFF;labelPlacement=auto;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;dashed=1;dashPattern=8 6;shadow=1;textShadow=1;" target="grpB" value="verifies before download">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="580" y="370" />
+              <mxPoint x="580" y="370" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e05" edge="1" parent="1" source="c05" style="edgeStyle=orthogonalEdgeStyle;libavoidRouting=1;rounded=0;jumpStyle=arc;jumpSize=10;html=1;jettySize=auto;orthogonalLoop=1;strokeWidth=2;endArrow=blockThin;endFill=1;strokeColor=#E4A11B;fontColor=#E4A11B;fontSize=11;fontStyle=1;labelBackgroundColor=#FFFFFF;labelPlacement=auto;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;dashed=0;shadow=1;textShadow=1;" target="grpB" value="fetches files">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="eF11" edge="1" parent="1" source="n11" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jumpStyle=arc;jumpSize=10;html=1;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;strokeColor=#9673A6;dashed=0;" target="n14" value="F11">
+        <mxCell id="e06" edge="1" parent="1" source="c09" style="edgeStyle=orthogonalEdgeStyle;rounded=0;jumpStyle=arc;jumpSize=10;html=1;jettySize=auto;orthogonalLoop=1;strokeWidth=2;endArrow=blockThin;endFill=1;strokeColor=#F5813A;fontColor=#F5813A;fontSize=11;fontStyle=1;labelBackgroundColor=#FFFFFF;labelPlacement=auto;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;dashed=0;shadow=1;textShadow=1;" target="c11" value="verified .deb">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="810" y="1075" />
+              <mxPoint x="810" y="735" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e09" edge="1" parent="1" source="c11" style="edgeStyle=orthogonalEdgeStyle;libavoidRouting=1;rounded=0;jumpStyle=arc;jumpSize=10;html=1;jettySize=auto;orthogonalLoop=1;strokeWidth=2;endArrow=blockThin;endFill=1;strokeColor=#1F7A8C;fontColor=#1F7A8C;fontSize=11;fontStyle=1;labelBackgroundColor=#FFFFFF;labelPlacement=auto;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;dashed=0;shadow=1;textShadow=1;" target="grpD" value="copies with tar -p">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="eF12" edge="1" parent="1" source="n12" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jumpStyle=arc;jumpSize=10;html=1;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;strokeColor=#9673A6;dashed=0;" target="n15" value="F12">
+        <mxCell id="e10" edge="1" parent="1" source="c12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;jumpStyle=arc;jumpSize=10;html=1;jettySize=auto;orthogonalLoop=1;strokeWidth=2;endArrow=blockThin;endFill=1;strokeColor=#0B3D5C;fontColor=#0B3D5C;fontSize=11;fontStyle=1;labelBackgroundColor=#FFFFFF;labelPlacement=auto;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;dashed=1;dashPattern=8 6;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;shadow=1;textShadow=1;" target="c23" value="drives exact removal">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1040" y="1230" />
+              <mxPoint x="2420" y="1230" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="1" source="grpD" style="edgeStyle=orthogonalEdgeStyle;libavoidRouting=1;rounded=0;jumpStyle=arc;jumpSize=10;html=1;jettySize=auto;orthogonalLoop=1;strokeWidth=2;endArrow=blockThin;endFill=1;strokeColor=#B85450;fontColor=#B85450;fontSize=11;fontStyle=1;labelBackgroundColor=#FFFFFF;labelPlacement=auto;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;dashed=0;shadow=1;textShadow=1;" target="grpE" value="registers, relabels">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="eF13" edge="1" parent="1" source="n13" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jumpStyle=arc;jumpSize=10;html=1;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;dashed=1;dashPattern=8 8;strokeColor=#666666;" target="n16" value="F13">
+        <mxCell id="e13" edge="1" parent="1" source="c19" style="edgeStyle=orthogonalEdgeStyle;libavoidRouting=1;rounded=0;jumpStyle=arc;jumpSize=10;html=1;jettySize=auto;orthogonalLoop=1;strokeWidth=2;endArrow=blockThin;endFill=1;strokeColor=#1F7A8C;fontColor=#1F7A8C;fontSize=11;fontStyle=1;labelBackgroundColor=#FFFFFF;labelPlacement=auto;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;dashed=0;shadow=1;textShadow=1;" target="c22" value="launches from menu">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="eF14" edge="1" parent="1" source="n14" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jumpStyle=arc;jumpSize=10;html=1;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;strokeColor=#B85450;dashed=0;" target="n17" value="F14">
+        <mxCell id="e15" edge="1" parent="1" source="c20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;jumpStyle=arc;jumpSize=10;html=1;jettySize=auto;orthogonalLoop=1;strokeWidth=2;endArrow=blockThin;endFill=1;strokeColor=#1F7A8C;fontColor=#1F7A8C;fontSize=11;fontStyle=1;labelBackgroundColor=#FFFFFF;labelPlacement=auto;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;dashed=1;dashPattern=8 6;shadow=1;textShadow=1;" target="band" value="re-verifies each update">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2420" y="370" />
+              <mxPoint x="2420" y="370" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e16" edge="1" parent="1" source="c22" style="edgeStyle=orthogonalEdgeStyle;libavoidRouting=1;rounded=0;jumpStyle=arc;jumpSize=10;html=1;jettySize=auto;orthogonalLoop=1;strokeWidth=2;endArrow=blockThin;endFill=1;strokeColor=#1F7A8C;fontColor=#1F7A8C;fontSize=11;fontStyle=1;labelBackgroundColor=#FFFFFF;labelPlacement=auto;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;dashed=0;shadow=1;textShadow=1;" target="grpG" value="probes for Cowork">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="eF15" edge="1" parent="1" source="n15" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jumpStyle=arc;jumpSize=10;html=1;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;dashed=1;dashPattern=8 8;strokeColor=#666666;" target="n18" value="F15">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="legend_box" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B7BF;strokeWidth=1.5;shadow=1;textShadow=1;" value="" vertex="1">
+          <mxGeometry height="510" width="2980" x="60" y="1300" as="geometry" />
         </mxCell>
-        <mxCell id="eF16" edge="1" parent="1" source="n17" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jumpStyle=arc;jumpSize=10;html=1;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;dashed=1;dashPattern=8 8;strokeColor=#666666;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="n19" value="F16">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="legend_head" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#B0B7BF;strokeWidth=1.5;fontColor=#1B2A33;fontSize=13;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="Legend" vertex="1">
+          <mxGeometry height="40" width="2980" x="60" y="1300" as="geometry" />
         </mxCell>
-        <mxCell id="eF17" edge="1" parent="1" source="n19" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jumpStyle=arc;jumpSize=10;html=1;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;strokeColor=#0E8088;dashed=0;" target="n20" value="F17">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="legend_keyhead" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontColor=#1B2A33;fontSize=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="&lt;b&gt;Colour key:&lt;/b&gt; badge and border colour show the platform class" vertex="1">
+          <mxGeometry height="20" width="1400" x="90" y="1360" as="geometry" />
         </mxCell>
-        <mxCell id="eF18" edge="1" parent="1" source="n20" style="edgeStyle=orthogonalEdgeStyle;rounded=1;jumpStyle=arc;jumpSize=10;html=1;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=10;fontColor=#333333;labelBackgroundColor=#FFFFFF;strokeColor=#0E8088;dashed=1;dashPattern=1 4;" target="n21" value="F18">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="legend_dot0" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#0B3D5C;strokeColor=#FFFFFF;strokeWidth=2;shadow=1;textShadow=1;" value="" vertex="1">
+          <mxGeometry height="20" width="20" x="90" y="1390" as="geometry" />
         </mxCell>
-        <mxCell id="keybox" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;verticalAlign=top;" value="" vertex="1">
-          <mxGeometry height="176" width="434" x="1180" y="112" as="geometry" />
+        <mxCell id="legend_dot0_t" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontColor=#1B2A33;fontSize=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="Integrity gate or install record: applied on every install and update" vertex="1">
+          <mxGeometry height="20" width="690" x="120" y="1390" as="geometry" />
         </mxCell>
-        <mxCell id="keytitle" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=13;fontStyle=1;fontFamily=Helvetica;" value="Key: connector vocabulary" vertex="1">
-          <mxGeometry height="24" width="404" x="1195" y="122" as="geometry" />
+        <mxCell id="legend_dot1" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#1F5FBF;strokeColor=#FFFFFF;strokeWidth=2;shadow=1;textShadow=1;" value="" vertex="1">
+          <mxGeometry height="20" width="20" x="830" y="1390" as="geometry" />
         </mxCell>
-        <mxCell id="k154" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" value="━━━━" vertex="1">
-          <mxGeometry height="24" width="70" x="1195" y="154" as="geometry" />
+        <mxCell id="legend_dot1_t" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontColor=#1B2A33;fontSize=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="Installed system files under /usr" vertex="1">
+          <mxGeometry height="20" width="690" x="860" y="1390" as="geometry" />
         </mxCell>
-        <mxCell id="km154" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" value="Solid: synchronous request and response" vertex="1">
-          <mxGeometry height="24" width="328" x="1271" y="154" as="geometry" />
+        <mxCell id="legend_dot2" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#1F7A8C;strokeColor=#FFFFFF;strokeWidth=2;shadow=1;textShadow=1;" value="" vertex="1">
+          <mxGeometry height="20" width="20" x="1570" y="1390" as="geometry" />
         </mxCell>
-        <mxCell id="k180" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" value="· · · ·" vertex="1">
-          <mxGeometry height="24" width="70" x="1195" y="180" as="geometry" />
+        <mxCell id="legend_dot2_t" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontColor=#1B2A33;fontSize=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="Fedora tool or local step" vertex="1">
+          <mxGeometry height="20" width="690" x="1600" y="1390" as="geometry" />
         </mxCell>
-        <mxCell id="km180" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" value="Dotted: bulk or file transfer" vertex="1">
-          <mxGeometry height="24" width="328" x="1271" y="180" as="geometry" />
+        <mxCell id="legend_dot3" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#5B4B8A;strokeColor=#FFFFFF;strokeWidth=2;shadow=1;textShadow=1;" value="" vertex="1">
+          <mxGeometry height="20" width="20" x="2310" y="1390" as="geometry" />
         </mxCell>
-        <mxCell id="k206" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" value="– – –" vertex="1">
-          <mxGeometry height="24" width="70" x="1195" y="206" as="geometry" />
+        <mxCell id="legend_dot3_t" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontColor=#1B2A33;fontSize=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="Per-user configuration, regenerate after each update" vertex="1">
+          <mxGeometry height="20" width="690" x="2340" y="1390" as="geometry" />
         </mxCell>
-        <mxCell id="km206" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" value="Grey dashed: control, security, metadata" vertex="1">
-          <mxGeometry height="24" width="328" x="1271" y="206" as="geometry" />
+        <mxCell id="legend_dot4" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#F5813A;strokeColor=#FFFFFF;strokeWidth=2;shadow=1;textShadow=1;" value="" vertex="1">
+          <mxGeometry height="20" width="20" x="90" y="1420" as="geometry" />
         </mxCell>
-        <mxCell id="k232" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" value="Colour" vertex="1">
-          <mxGeometry height="24" width="70" x="1195" y="232" as="geometry" />
+        <mxCell id="legend_dot4_t" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontColor=#1B2A33;fontSize=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="Anthropic upstream, third party outside your control (dashed outline)" vertex="1">
+          <mxGeometry height="20" width="690" x="120" y="1420" as="geometry" />
         </mxCell>
-        <mxCell id="km232" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" value="Matches the stroke of the source layer" vertex="1">
-          <mxGeometry height="24" width="328" x="1271" y="232" as="geometry" />
+        <mxCell id="legend_dot5" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#6B7C8C;strokeColor=#FFFFFF;strokeWidth=2;shadow=1;textShadow=1;" value="" vertex="1">
+          <mxGeometry height="20" width="20" x="830" y="1420" as="geometry" />
         </mxCell>
-        <mxCell id="flowbox" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;verticalAlign=top;" value="" vertex="1">
-          <mxGeometry height="573" width="434" x="1180" y="318" as="geometry" />
+        <mxCell id="legend_dot5_t" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontColor=#1B2A33;fontSize=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="Interim item, removed once the install is verified (dashed outline)" vertex="1">
+          <mxGeometry height="20" width="690" x="860" y="1420" as="geometry" />
         </mxCell>
-        <mxCell id="flowtitle" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=13;fontStyle=1;fontFamily=Helvetica;" value="Flow reference" vertex="1">
-          <mxGeometry height="24" width="404" x="1195" y="328" as="geometry" />
+        <mxCell id="legend_dot6" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#E4A11B;strokeColor=#FFFFFF;strokeWidth=2;shadow=1;textShadow=1;" value="" vertex="1">
+          <mxGeometry height="20" width="20" x="1570" y="1420" as="geometry" />
         </mxCell>
-        <mxCell id="fh0" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontStyle=1;fontFamily=Helvetica;" value="Ref" vertex="1">
-          <mxGeometry height="22" width="34" x="1195" y="356" as="geometry" />
+        <mxCell id="legend_dot6_t" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontColor=#1B2A33;fontSize=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="You, running the install" vertex="1">
+          <mxGeometry height="20" width="690" x="1600" y="1420" as="geometry" />
         </mxCell>
-        <mxCell id="fh1" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontStyle=1;fontFamily=Helvetica;" value="Source to target" vertex="1">
-          <mxGeometry height="22" width="172" x="1233" y="356" as="geometry" />
+        <mxCell id="legend_line" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontColor=#1B2A33;fontSize=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="&lt;b&gt;Line style:&lt;/b&gt; solid line is runtime data flow; dashed line is design-time governance (the integrity chain) or the control loop (re-verification on every update). Each connector takes the colour of the box it leaves." vertex="1">
+          <mxGeometry height="20" width="2920" x="90" y="1460" as="geometry" />
         </mxCell>
-        <mxCell id="fh2" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontStyle=1;fontFamily=Helvetica;" value="Mechanism and cadence" vertex="1">
-          <mxGeometry height="22" width="190" x="1409" y="356" as="geometry" />
+        <mxCell id="legend_numhead" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontColor=#1B2A33;fontSize=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="&lt;b&gt;Numbered objects&lt;/b&gt;" vertex="1">
+          <mxGeometry height="20" width="600" x="90" y="1500" as="geometry" />
         </mxCell>
-        <mxCell id="ftF1c0" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="F1" vertex="1">
-          <mxGeometry height="26" width="34" x="1195" y="380" as="geometry" />
+        <mxCell id="legend_n01" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#0B3D5C;strokeColor=#FFFFFF;strokeWidth=1.5;fontColor=#FFFFFF;fontSize=9;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="01" vertex="1">
+          <mxGeometry height="20" width="20" x="90" y="1530" as="geometry" />
         </mxCell>
-        <mxCell id="ftF1c1" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Repository to download" vertex="1">
-          <mxGeometry height="26" width="172" x="1233" y="380" as="geometry" />
+        <mxCell id="legend_n01_t" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontColor=#1B2A33;fontSize=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="Key fingerprint check" vertex="1">
+          <mxGeometry height="20" width="690" x="120" y="1530" as="geometry" />
         </mxCell>
-        <mxCell id="ftF1c2" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="HTTPS/TLS, on demand" vertex="1">
-          <mxGeometry height="26" width="190" x="1409" y="380" as="geometry" />
+        <mxCell id="legend_n02" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#0B3D5C;strokeColor=#FFFFFF;strokeWidth=1.5;fontColor=#FFFFFF;fontSize=9;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="02" vertex="1">
+          <mxGeometry height="20" width="20" x="90" y="1560" as="geometry" />
         </mxCell>
-        <mxCell id="ftF2c0" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="F2" vertex="1">
-          <mxGeometry height="26" width="34" x="1195" y="407" as="geometry" />
+        <mxCell id="legend_n02_t" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontColor=#1B2A33;fontSize=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="InRelease signature check" vertex="1">
+          <mxGeometry height="20" width="690" x="120" y="1560" as="geometry" />
         </mxCell>
-        <mxCell id="ftF2c1" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Signed index to comparison" vertex="1">
-          <mxGeometry height="26" width="172" x="1233" y="407" as="geometry" />
+        <mxCell id="legend_n03" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#0B3D5C;strokeColor=#FFFFFF;strokeWidth=1.5;fontColor=#FFFFFF;fontSize=9;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="03" vertex="1">
+          <mxGeometry height="20" width="20" x="90" y="1590" as="geometry" />
         </mxCell>
-        <mxCell id="ftF2c2" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="File transfer, per release" vertex="1">
-          <mxGeometry height="26" width="190" x="1409" y="407" as="geometry" />
+        <mxCell id="legend_n03_t" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontColor=#1B2A33;fontSize=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="Index hash check" vertex="1">
+          <mxGeometry height="20" width="690" x="120" y="1590" as="geometry" />
         </mxCell>
-        <mxCell id="ftF3c0" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="F3" vertex="1">
-          <mxGeometry height="26" width="34" x="1195" y="434" as="geometry" />
+        <mxCell id="legend_n04" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#0B3D5C;strokeColor=#FFFFFF;strokeWidth=1.5;fontColor=#FFFFFF;fontSize=9;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="04" vertex="1">
+          <mxGeometry height="20" width="20" x="90" y="1620" as="geometry" />
         </mxCell>
-        <mxCell id="ftF3c1" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Key to fingerprint check" vertex="1">
-          <mxGeometry height="26" width="172" x="1233" y="434" as="geometry" />
+        <mxCell id="legend_n04_t" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontColor=#1B2A33;fontSize=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="Package SHA-256 check" vertex="1">
+          <mxGeometry height="20" width="690" x="120" y="1620" as="geometry" />
         </mxCell>
-        <mxCell id="ftF3c2" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="HTTPS/TLS, on demand" vertex="1">
-          <mxGeometry height="26" width="190" x="1409" y="434" as="geometry" />
+        <mxCell id="legend_n05" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#E4A11B;strokeColor=#FFFFFF;strokeWidth=1.5;fontColor=#FFFFFF;fontSize=9;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="05" vertex="1">
+          <mxGeometry height="20" width="20" x="90" y="1650" as="geometry" />
         </mxCell>
-        <mxCell id="ftF4c0" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="F4" vertex="1">
-          <mxGeometry height="26" width="34" x="1195" y="461" as="geometry" />
+        <mxCell id="legend_n05_t" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontColor=#1B2A33;fontSize=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="You, at Konsole (the person installing)" vertex="1">
+          <mxGeometry height="20" width="690" x="120" y="1650" as="geometry" />
         </mxCell>
-        <mxCell id="ftF4c1" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Download to extraction" vertex="1">
-          <mxGeometry height="26" width="172" x="1233" y="461" as="geometry" />
+        <mxCell id="legend_n06" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#F5813A;strokeColor=#FFFFFF;strokeWidth=1.5;fontColor=#FFFFFF;fontSize=9;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="06" vertex="1">
+          <mxGeometry height="20" width="20" x="90" y="1680" as="geometry" />
         </mxCell>
-        <mxCell id="ftF4c2" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Local archive read, one pass" vertex="1">
-          <mxGeometry height="26" width="190" x="1409" y="461" as="geometry" />
+        <mxCell id="legend_n06_t" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontColor=#1B2A33;fontSize=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="Signing key (key.asc)" vertex="1">
+          <mxGeometry height="20" width="690" x="120" y="1680" as="geometry" />
         </mxCell>
-        <mxCell id="ftF5c0" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="F5" vertex="1">
-          <mxGeometry height="26" width="34" x="1195" y="488" as="geometry" />
+        <mxCell id="legend_n07" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#F5813A;strokeColor=#FFFFFF;strokeWidth=1.5;fontColor=#FFFFFF;fontSize=9;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="07" vertex="1">
+          <mxGeometry height="20" width="20" x="90" y="1710" as="geometry" />
         </mxCell>
-        <mxCell id="ftF5c1" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Comparison to staging" vertex="1">
-          <mxGeometry height="26" width="172" x="1233" y="488" as="geometry" />
+        <mxCell id="legend_n07_t" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontColor=#1B2A33;fontSize=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="Signed release file (InRelease)" vertex="1">
+          <mxGeometry height="20" width="690" x="120" y="1710" as="geometry" />
         </mxCell>
-        <mxCell id="ftF5c2" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Gate, blocks on mismatch" vertex="1">
-          <mxGeometry height="26" width="190" x="1409" y="488" as="geometry" />
+        <mxCell id="legend_n08" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#F5813A;strokeColor=#FFFFFF;strokeWidth=1.5;fontColor=#FFFFFF;fontSize=9;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="08" vertex="1">
+          <mxGeometry height="20" width="20" x="830" y="1530" as="geometry" />
         </mxCell>
-        <mxCell id="ftF6c0" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="F6" vertex="1">
-          <mxGeometry height="26" width="34" x="1195" y="515" as="geometry" />
+        <mxCell id="legend_n08_t" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontColor=#1B2A33;fontSize=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="Package index (Packages)" vertex="1">
+          <mxGeometry height="20" width="690" x="860" y="1530" as="geometry" />
         </mxCell>
-        <mxCell id="ftF6c1" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Fingerprint to manifest" vertex="1">
-          <mxGeometry height="26" width="172" x="1233" y="515" as="geometry" />
+        <mxCell id="legend_n09" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#F5813A;strokeColor=#FFFFFF;strokeWidth=1.5;fontColor=#FFFFFF;fontSize=9;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="09" vertex="1">
+          <mxGeometry height="20" width="20" x="830" y="1560" as="geometry" />
         </mxCell>
-        <mxCell id="ftF6c2" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Control, provenance record" vertex="1">
-          <mxGeometry height="26" width="190" x="1409" y="515" as="geometry" />
+        <mxCell id="legend_n09_t" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontColor=#1B2A33;fontSize=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="Package pool (.deb)" vertex="1">
+          <mxGeometry height="20" width="690" x="860" y="1560" as="geometry" />
         </mxCell>
-        <mxCell id="ftF7c0" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="F7" vertex="1">
-          <mxGeometry height="26" width="34" x="1195" y="542" as="geometry" />
+        <mxCell id="legend_n10" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#6B7C8C;strokeColor=#FFFFFF;strokeWidth=1.5;fontColor=#FFFFFF;fontSize=9;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="10" vertex="1">
+          <mxGeometry height="20" width="20" x="830" y="1590" as="geometry" />
         </mxCell>
-        <mxCell id="ftF7c1" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Extraction to runtime" vertex="1">
-          <mxGeometry height="26" width="172" x="1233" y="542" as="geometry" />
+        <mxCell id="legend_n10_t" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontColor=#1B2A33;fontSize=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="Fresh staging folder (/var/tmp)" vertex="1">
+          <mxGeometry height="20" width="690" x="860" y="1590" as="geometry" />
         </mxCell>
-        <mxCell id="ftF7c2" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="tar copy, mode preserved" vertex="1">
-          <mxGeometry height="26" width="190" x="1409" y="542" as="geometry" />
+        <mxCell id="legend_n11" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#1F7A8C;strokeColor=#FFFFFF;strokeWidth=1.5;fontColor=#FFFFFF;fontSize=9;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="11" vertex="1">
+          <mxGeometry height="20" width="20" x="830" y="1620" as="geometry" />
         </mxCell>
-        <mxCell id="ftF8c0" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="F8" vertex="1">
-          <mxGeometry height="26" width="34" x="1195" y="569" as="geometry" />
+        <mxCell id="legend_n11_t" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontColor=#1B2A33;fontSize=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="Archive extraction" vertex="1">
+          <mxGeometry height="20" width="690" x="860" y="1620" as="geometry" />
         </mxCell>
-        <mxCell id="ftF8c1" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Staging to PATH symlink" vertex="1">
-          <mxGeometry height="26" width="172" x="1233" y="569" as="geometry" />
+        <mxCell id="legend_n12" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#0B3D5C;strokeColor=#FFFFFF;strokeWidth=1.5;fontColor=#FFFFFF;fontSize=9;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="12" vertex="1">
+          <mxGeometry height="20" width="20" x="830" y="1650" as="geometry" />
         </mxCell>
-        <mxCell id="ftF8c2" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Symlink creation, one pass" vertex="1">
-          <mxGeometry height="26" width="190" x="1409" y="569" as="geometry" />
+        <mxCell id="legend_n12_t" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontColor=#1B2A33;fontSize=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="Install manifest (~/.local/share)" vertex="1">
+          <mxGeometry height="20" width="690" x="860" y="1650" as="geometry" />
         </mxCell>
-        <mxCell id="ftF9c0" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="F9" vertex="1">
-          <mxGeometry height="26" width="34" x="1195" y="596" as="geometry" />
+        <mxCell id="legend_n13" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#1F5FBF;strokeColor=#FFFFFF;strokeWidth=1.5;fontColor=#FFFFFF;fontSize=9;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="13" vertex="1">
+          <mxGeometry height="20" width="20" x="830" y="1680" as="geometry" />
         </mxCell>
-        <mxCell id="ftF9c1" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Manifest to /usr/share" vertex="1">
-          <mxGeometry height="26" width="172" x="1233" y="596" as="geometry" />
+        <mxCell id="legend_n13_t" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontColor=#1B2A33;fontSize=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="/usr/lib/claude-desktop" vertex="1">
+          <mxGeometry height="20" width="690" x="860" y="1680" as="geometry" />
         </mxCell>
-        <mxCell id="ftF9c2" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="File transfer, per release" vertex="1">
-          <mxGeometry height="26" width="190" x="1409" y="596" as="geometry" />
+        <mxCell id="legend_n14" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#1F5FBF;strokeColor=#FFFFFF;strokeWidth=1.5;fontColor=#FFFFFF;fontSize=9;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="14" vertex="1">
+          <mxGeometry height="20" width="20" x="830" y="1710" as="geometry" />
         </mxCell>
-        <mxCell id="ftF10c0" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="F10" vertex="1">
-          <mxGeometry height="26" width="34" x="1195" y="623" as="geometry" />
+        <mxCell id="legend_n14_t" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontColor=#1B2A33;fontSize=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="/usr/bin/claude-desktop" vertex="1">
+          <mxGeometry height="20" width="690" x="860" y="1710" as="geometry" />
         </mxCell>
-        <mxCell id="ftF10c1" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Runtime to sandbox" vertex="1">
-          <mxGeometry height="26" width="172" x="1233" y="623" as="geometry" />
+        <mxCell id="legend_n15" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#1F5FBF;strokeColor=#FFFFFF;strokeWidth=1.5;fontColor=#FFFFFF;fontSize=9;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="15" vertex="1">
+          <mxGeometry height="20" width="20" x="1570" y="1530" as="geometry" />
         </mxCell>
-        <mxCell id="ftF10c2" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Verified, relabelled post-copy" vertex="1">
-          <mxGeometry height="26" width="190" x="1409" y="623" as="geometry" />
+        <mxCell id="legend_n15_t" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontColor=#1B2A33;fontSize=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="/usr/share" vertex="1">
+          <mxGeometry height="20" width="690" x="1600" y="1530" as="geometry" />
         </mxCell>
-        <mxCell id="ftF11c0" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="F11" vertex="1">
-          <mxGeometry height="26" width="34" x="1195" y="650" as="geometry" />
+        <mxCell id="legend_n16" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#1F7A8C;strokeColor=#FFFFFF;strokeWidth=1.5;fontColor=#FFFFFF;fontSize=9;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="16" vertex="1">
+          <mxGeometry height="20" width="20" x="1570" y="1560" as="geometry" />
         </mxCell>
-        <mxCell id="ftF11c1" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Symlink to resolution" vertex="1">
-          <mxGeometry height="26" width="172" x="1233" y="650" as="geometry" />
+        <mxCell id="legend_n16_t" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontColor=#1B2A33;fontSize=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="SELinux relabel" vertex="1">
+          <mxGeometry height="20" width="690" x="1600" y="1560" as="geometry" />
         </mxCell>
-        <mxCell id="ftF11c2" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Shell lookup, every launch" vertex="1">
-          <mxGeometry height="26" width="190" x="1409" y="650" as="geometry" />
+        <mxCell id="legend_n17" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#1F7A8C;strokeColor=#FFFFFF;strokeWidth=1.5;fontColor=#FFFFFF;fontSize=9;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="17" vertex="1">
+          <mxGeometry height="20" width="20" x="1570" y="1590" as="geometry" />
         </mxCell>
-        <mxCell id="ftF12c0" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="F12" vertex="1">
-          <mxGeometry height="26" width="34" x="1195" y="677" as="geometry" />
+        <mxCell id="legend_n17_t" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontColor=#1B2A33;fontSize=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="MIME registration" vertex="1">
+          <mxGeometry height="20" width="690" x="1600" y="1590" as="geometry" />
         </mxCell>
-        <mxCell id="ftF12c1" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Assets to menu cache" vertex="1">
-          <mxGeometry height="26" width="172" x="1233" y="677" as="geometry" />
+        <mxCell id="legend_n18" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#5B4B8A;strokeColor=#FFFFFF;strokeWidth=1.5;fontColor=#FFFFFF;fontSize=9;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="18" vertex="1">
+          <mxGeometry height="20" width="20" x="1570" y="1620" as="geometry" />
         </mxCell>
-        <mxCell id="ftF12c2" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Cache rebuild, post-install" vertex="1">
-          <mxGeometry height="26" width="190" x="1409" y="677" as="geometry" />
+        <mxCell id="legend_n18_t" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontColor=#1B2A33;fontSize=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="XWayland desktop entry" vertex="1">
+          <mxGeometry height="20" width="690" x="1600" y="1620" as="geometry" />
         </mxCell>
-        <mxCell id="ftF13c0" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="F13" vertex="1">
-          <mxGeometry height="26" width="34" x="1195" y="704" as="geometry" />
+        <mxCell id="legend_n19" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#1F7A8C;strokeColor=#FFFFFF;strokeWidth=1.5;fontColor=#FFFFFF;fontSize=9;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="19" vertex="1">
+          <mxGeometry height="20" width="20" x="1570" y="1650" as="geometry" />
         </mxCell>
-        <mxCell id="ftF13c1" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Sandbox to update cycle" vertex="1">
-          <mxGeometry height="26" width="172" x="1233" y="704" as="geometry" />
+        <mxCell id="legend_n19_t" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontColor=#1B2A33;fontSize=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="Desktop and menu caches" vertex="1">
+          <mxGeometry height="20" width="690" x="1600" y="1650" as="geometry" />
         </mxCell>
-        <mxCell id="ftF13c2" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Control, re-checked each update" vertex="1">
-          <mxGeometry height="26" width="190" x="1409" y="704" as="geometry" />
+        <mxCell id="legend_n20" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#1F7A8C;strokeColor=#FFFFFF;strokeWidth=1.5;fontColor=#FFFFFF;fontSize=9;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="20" vertex="1">
+          <mxGeometry height="20" width="20" x="1570" y="1680" as="geometry" />
         </mxCell>
-        <mxCell id="ftF14c0" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="F14" vertex="1">
-          <mxGeometry height="26" width="34" x="1195" y="731" as="geometry" />
+        <mxCell id="legend_n20_t" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontColor=#1B2A33;fontSize=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="Move-aside update" vertex="1">
+          <mxGeometry height="20" width="690" x="1600" y="1680" as="geometry" />
         </mxCell>
-        <mxCell id="ftF14c1" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Resolution to launch" vertex="1">
-          <mxGeometry height="26" width="172" x="1233" y="731" as="geometry" />
+        <mxCell id="legend_n21" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#6B7C8C;strokeColor=#FFFFFF;strokeWidth=1.5;fontColor=#FFFFFF;fontSize=9;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="21" vertex="1">
+          <mxGeometry height="20" width="20" x="1570" y="1710" as="geometry" />
         </mxCell>
-        <mxCell id="ftF14c2" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Process start, on demand" vertex="1">
-          <mxGeometry height="26" width="190" x="1409" y="731" as="geometry" />
+        <mxCell id="legend_n21_t" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontColor=#1B2A33;fontSize=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="Rollback copy (.prev)" vertex="1">
+          <mxGeometry height="20" width="690" x="1600" y="1710" as="geometry" />
         </mxCell>
-        <mxCell id="ftF15c0" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="F15" vertex="1">
-          <mxGeometry height="26" width="34" x="1195" y="758" as="geometry" />
+        <mxCell id="legend_n22" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#1F7A8C;strokeColor=#FFFFFF;strokeWidth=1.5;fontColor=#FFFFFF;fontSize=9;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="22" vertex="1">
+          <mxGeometry height="20" width="20" x="2310" y="1530" as="geometry" />
         </mxCell>
-        <mxCell id="ftF15c1" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Menu cache to removal" vertex="1">
-          <mxGeometry height="26" width="172" x="1233" y="758" as="geometry" />
+        <mxCell id="legend_n22_t" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontColor=#1B2A33;fontSize=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="Runtime verification" vertex="1">
+          <mxGeometry height="20" width="690" x="2340" y="1530" as="geometry" />
         </mxCell>
-        <mxCell id="ftF15c2" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Control, manifest-driven" vertex="1">
-          <mxGeometry height="26" width="190" x="1409" y="758" as="geometry" />
+        <mxCell id="legend_n23" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#0B3D5C;strokeColor=#FFFFFF;strokeWidth=1.5;fontColor=#FFFFFF;fontSize=9;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="23" vertex="1">
+          <mxGeometry height="20" width="20" x="2310" y="1560" as="geometry" />
         </mxCell>
-        <mxCell id="ftF16c0" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="F16" vertex="1">
-          <mxGeometry height="26" width="34" x="1195" y="785" as="geometry" />
+        <mxCell id="legend_n23_t" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontColor=#1B2A33;fontSize=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="Manifest-driven removal" vertex="1">
+          <mxGeometry height="20" width="690" x="2340" y="1560" as="geometry" />
         </mxCell>
-        <mxCell id="ftF16c1" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Launch to requirement check" vertex="1">
-          <mxGeometry height="26" width="172" x="1233" y="785" as="geometry" />
+        <mxCell id="legend_n24" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#1F7A8C;strokeColor=#FFFFFF;strokeWidth=1.5;fontColor=#FFFFFF;fontSize=9;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="24" vertex="1">
+          <mxGeometry height="20" width="20" x="2310" y="1590" as="geometry" />
         </mxCell>
-        <mxCell id="ftF16c2" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Control, probed once per launch" vertex="1">
-          <mxGeometry height="26" width="190" x="1409" y="785" as="geometry" />
+        <mxCell id="legend_n24_t" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontColor=#1B2A33;fontSize=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="Requirement check" vertex="1">
+          <mxGeometry height="20" width="690" x="2340" y="1590" as="geometry" />
         </mxCell>
-        <mxCell id="ftF17c0" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="F17" vertex="1">
-          <mxGeometry height="26" width="34" x="1195" y="812" as="geometry" />
+        <mxCell id="legend_n25" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#1F7A8C;strokeColor=#FFFFFF;strokeWidth=1.5;fontColor=#FFFFFF;fontSize=9;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="25" vertex="1">
+          <mxGeometry height="20" width="20" x="2310" y="1620" as="geometry" />
         </mxCell>
-        <mxCell id="ftF17c1" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Requirement check to VM" vertex="1">
-          <mxGeometry height="26" width="172" x="1233" y="812" as="geometry" />
+        <mxCell id="legend_n25_t" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontColor=#1B2A33;fontSize=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="QEMU/KVM virtual machine" vertex="1">
+          <mxGeometry height="20" width="690" x="2340" y="1620" as="geometry" />
         </mxCell>
-        <mxCell id="ftF17c2" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="Process start, on pass" vertex="1">
-          <mxGeometry height="26" width="190" x="1409" y="812" as="geometry" />
+        <mxCell id="legend_n26" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#1F7A8C;strokeColor=#FFFFFF;strokeWidth=1.5;fontColor=#FFFFFF;fontSize=9;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="26" vertex="1">
+          <mxGeometry height="20" width="20" x="2310" y="1650" as="geometry" />
         </mxCell>
-        <mxCell id="ftF18c0" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="F18" vertex="1">
-          <mxGeometry height="26" width="34" x="1195" y="839" as="geometry" />
+        <mxCell id="legend_n26_t" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontColor=#1B2A33;fontSize=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="Host-guest channels" vertex="1">
+          <mxGeometry height="20" width="690" x="2340" y="1650" as="geometry" />
         </mxCell>
-        <mxCell id="ftF18c1" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="VM to host channels" vertex="1">
-          <mxGeometry height="26" width="172" x="1233" y="839" as="geometry" />
-        </mxCell>
-        <mxCell id="ftF18c2" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=10;fontFamily=Helvetica;" value="File sharing, per session" vertex="1">
-          <mxGeometry height="26" width="190" x="1409" y="839" as="geometry" />
-        </mxCell>
-        <mxCell id="verbox" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#666666;verticalAlign=top;" value="" vertex="1">
-          <mxGeometry height="220" width="434" x="1180" y="921" as="geometry" />
-        </mxCell>
-        <mxCell id="vertitle" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=13;fontStyle=1;fontFamily=Helvetica;" value="Version, owner and viewpoint" vertex="1">
-          <mxGeometry height="24" width="404" x="1195" y="931" as="geometry" />
-        </mxCell>
-        <mxCell id="v0" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" value="&lt;b&gt;Version&lt;/b&gt; v3.0" vertex="1">
-          <mxGeometry height="24" width="404" x="1195" y="961" as="geometry" />
-        </mxCell>
-        <mxCell id="v1" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" value="&lt;b&gt;Status&lt;/b&gt; Validated on Fedora 45" vertex="1">
-          <mxGeometry height="24" width="404" x="1195" y="985" as="geometry" />
-        </mxCell>
-        <mxCell id="v2" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" value="&lt;b&gt;Owner&lt;/b&gt; NeumannTechTips" vertex="1">
-          <mxGeometry height="24" width="404" x="1195" y="1009" as="geometry" />
-        </mxCell>
-        <mxCell id="v3" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" value="&lt;b&gt;Date&lt;/b&gt; 2026-11-14" vertex="1">
-          <mxGeometry height="24" width="404" x="1195" y="1033" as="geometry" />
-        </mxCell>
-        <mxCell id="v5" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" value="&lt;b&gt;Viewpoint&lt;/b&gt; Logical build and install view of a manual package installation on Fedora 45 KDE Plasma, including Cowork virtualisation." vertex="1">
-          <mxGeometry height="24" width="404" x="1195" y="1063" as="geometry" />
-        </mxCell>
-        <mxCell id="v7" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" value="&lt;b&gt;Out of scope&lt;/b&gt; Application internals, account authentication, network topology, and the supported apt installation path on Debian and Ubuntu." vertex="1">
-          <mxGeometry height="24" width="404" x="1195" y="1100" as="geometry" />
+        <mxCell id="legend_version" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fontColor=#1B2A33;fontSize=12;fontFamily=Segoe UI, Helvetica, Arial, sans-serif;shadow=1;textShadow=1;" value="&lt;b&gt;Version&lt;/b&gt; v3.1  ·  &lt;b&gt;Status&lt;/b&gt; Validated on Fedora 45  ·  &lt;b&gt;Author&lt;/b&gt;&amp;nbsp;NeumannTechTips  ·  &lt;b&gt;Date&lt;/b&gt; 2026-11-14  ·  &lt;b&gt;Viewpoint&lt;/b&gt; logical build and install view of a manual package installation, including Cowork  ·  &lt;b&gt;Out of scope&lt;/b&gt; application internals, account authentication, network topology and the supported apt route on Debian and Ubuntu" vertex="1">
+          <mxGeometry height="40" width="2920" x="90" y="1760" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
