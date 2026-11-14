@@ -107,7 +107,7 @@ Every command in this guide was run on the machine below on 14 November 2026, un
 | Cowork | Started without any requirements message |
 
 > [!IMPORTANT]
-> **Not yet tested:** a first-time install on a freshly installed Fedora 45 system, native Wayland without the XWayland flag, arm64, the Quick Entry global hotkey, and Cowork with only the bundled `virtiofsd`. The update sequence in this guide also differs from the one run on the test machine in one deliberate respect, explained in [Updating](#-updating).
+> **Not yet tested:** a first-time install on a freshly installed Fedora 45 system, native Wayland without the XWayland flag, arm64, the Quick Entry global hotkey, and Cowork with only the bundled `virtiofsd`. The update sequence in this guide also differs from the one run on the test machine in two deliberate respects, explained in [Updating](#-updating).
 
 ---
 
@@ -142,6 +142,14 @@ sudo dnf install dpkg curl gnupg2 shared-mime-info desktop-file-utils gtk-update
 
 This adds an extraction tool, not a second package manager. Nothing about how `dnf` manages your system changes.
 
+Version 5.11492.5 also lists `bubblewrap`, `socat` and `openssh-client` as recommended packages, which apt would install by default on Debian and Ubuntu. Install their Fedora equivalents as well, so that your system matches what the package expects:
+
+```bash
+sudo dnf install bubblewrap socat openssh-clients
+```
+
+This command was added from the package's metadata after the validation run. Most Fedora KDE systems already have all three.
+
 ### Step 3: Prepare a working folder and a permanent record folder
 
 ```bash
@@ -173,7 +181,7 @@ The fingerprint must read:
 31DD DE24 DDFA B679 F42D  7BD2 BAA9 29FF 1A7E CACE
 ```
 
-If it differs, stop. Anthropic publishes this fingerprint in its own installation documentation, which makes it an independent reference point.
+If it differs, stop. Anthropic publishes this fingerprint in its own installation documentation, which makes it an independent reference point. The key's name refers to Claude Code because Anthropic uses the same key to sign the Claude Code CLI repositories.
 
 **Check the release file's signature in a throwaway key store.**
 
@@ -212,7 +220,11 @@ read -r FILE SHA < <(awk -v v="$VER" '
   /^$/ { if (p=="claude-desktop" && ver==v) print f, s; p=ver=f=s="" }
   END  { if (p=="claude-desktop" && ver==v) print f, s }' Packages)
 echo "Newest: $VER"
+```
 
+The first block only reads the index, so you can run it on its own to see whether a new version exists. The second block downloads and checks the package:
+
+```bash
 curl -fLO "$BASE/$FILE"
 DEB=$(basename "$FILE")
 echo "$SHA  $DEB" | sha256sum -c -
@@ -301,7 +313,7 @@ claude-desktop --ozone-platform=x11
 
 Run it in the foreground the first time so that any start-up error reaches your terminal. The flag is explained in the next section, which also shows how to make it permanent.
 
-Sign in with your Anthropic account. Chat is available on every plan, including Free. Claude Code and Cowork require a paid plan: Pro, Max, Team or Enterprise.
+Sign in with your Anthropic account. Chat is available on every plan, including Free. Claude Code and Cowork require a paid plan: Pro, Max, Ultra, Team or Enterprise.
 
 ---
 
@@ -345,7 +357,7 @@ Cowork runs its longer agentic tasks inside a virtual machine that Claude Deskto
 | Hardware virtualisation | Enable VT-x or AMD-V in firmware | `vmx` flag present, `kvm_intel` loaded |
 | QEMU | `qemu-system-x86-core` | Installed |
 | UEFI firmware | `edk2-ovmf` | Installed. The package itself provides Debian-style links under `/usr/share/OVMF` |
-| `virtiofsd` | Bundled at `/usr/lib/claude-desktop/resources/virtiofsd`. Fedora's `virtiofsd` package is optional | Both present during the test |
+| `virtiofsd` | Fedora's `virtiofsd` package, which the Debian package lists as recommended. A bundled copy also ships at `/usr/lib/claude-desktop/resources/virtiofsd` | Both present during the test |
 | `/dev/kvm` | Membership of the `kvm` group | Group member. Device was `root:kvm` with mode `0666` |
 | `/dev/vhost-vsock` | `vhost_vsock` kernel module | Module present in the kernel tree, device node present at boot |
 
@@ -353,7 +365,7 @@ Check your system in one pass. These commands only read:
 
 ```bash
 grep -m1 -oE 'vmx|svm' /proc/cpuinfo || echo "no virtualisation flag: enable it in firmware"
-rpm -q qemu-system-x86-core edk2-ovmf
+rpm -q qemu-system-x86-core edk2-ovmf virtiofsd
 ls -l /dev/kvm /dev/vhost-vsock
 id -nG | tr ' ' '\n' | grep -x kvm || echo "not in the kvm group"
 modinfo -n vhost_vsock
@@ -363,7 +375,7 @@ ls -l /usr/share/OVMF/
 Fix anything missing:
 
 ```bash
-sudo dnf install qemu-system-x86-core edk2-ovmf
+sudo dnf install qemu-system-x86-core edk2-ovmf virtiofsd
 sudo usermod -aG kvm "$USER"
 ```
 
@@ -383,7 +395,7 @@ Claude Desktop checks these requirements once, at launch, so restart it after an
 
 ## 🔄 Updating
 
-The desktop app does not update itself on Linux, and `dnf` does not know it exists. Check the index for a newer version whenever you like by repeating Steps 3 to 5. The newest version is printed after `Newest:`, and you can compare it with your latest manifest:
+The desktop app does not update itself on Linux, and `dnf` does not know it exists. To check the index for a newer version without downloading anything, repeat Steps 3 and 4 and then only the first block of Step 5. The newest version is printed after `Newest:`, and you can compare it with your latest manifest:
 
 ```bash
 ls ~/.local/share/claude-desktop-fedora/
@@ -404,12 +416,14 @@ To update:
    cp -a ~/.config/Claude ~/.config/Claude.bak-before-update
    ```
 
-3. **Verify, download, stage and record** by repeating Steps 3 to 7. Keep the previous manifest's path for step 6 of this list:
+3. **Verify, download, stage and record.** Repeat Steps 3 to 6. Before you repeat Step 7, save the path of your current manifest for step 6 of this list:
 
    ```bash
-   OLD=$(ls ~/.local/share/claude-desktop-fedora/installed-files-*.txt | sort -V | tail -n 2 | head -n 1)
-   echo "$OLD"
+   OLD=$(ls ~/.local/share/claude-desktop-fedora/installed-files-*.txt 2>/dev/null | sort -V | tail -n 1)
+   echo "${OLD:-no previous manifest found}"
    ```
+
+   Then repeat Step 7. If no previous manifest is found, for example after migrating from the Fedora 44 edition, skip step 6 of this list.
 
 4. **Move the current version aside**, so that a failed copy can be rolled back:
 
@@ -422,7 +436,7 @@ To update:
 6. **List files the old version placed outside `/usr/lib/claude-desktop` that the new version no longer ships:**
 
    ```bash
-   comm -23 <(grep -v '^/usr/lib/claude-desktop/' "$OLD" | sort) \
+   [ -n "$OLD" ] && comm -23 <(grep -v '^/usr/lib/claude-desktop/' "$OLD" | sort) \
             <(grep -v '^/usr/lib/claude-desktop/' "$MANIFEST" | sort)
    ```
 
@@ -444,10 +458,10 @@ To update:
 
    Do not leave it in place. It contains an outdated copy of `chrome-sandbox` that still carries the setuid-root bit.
 
-To roll back before step 9, quit the app, then run `sudo rm -rf /usr/lib/claude-desktop && sudo mv /usr/lib/claude-desktop.prev /usr/lib/claude-desktop`. After step 9, reinstall the older package by following the installation steps with its version number, which the signed index continues to list.
+To roll back before step 9, quit the app, then run `sudo rm -rf /usr/lib/claude-desktop && sudo mv /usr/lib/claude-desktop.prev /usr/lib/claude-desktop`. After step 9, reinstall the older package by following the installation steps. In Step 5, replace the first line with that version, for example `VER=2.42304.2`, and run the rest as written. The signed index still lists older versions.
 
 > [!NOTE]
-> On the test machine, the update from 2.42304.2 to 5.11492.5 deleted the old directory before copying the new one. That worked, but it left no rollback copy if the copy had failed. Moving the old directory aside first is the safer order, and it is the only step here that was not run verbatim.
+> On the test machine, the update from 2.42304.2 to 5.11492.5 deleted the old directory before copying the new one. That worked, but it left no rollback copy if the copy had failed. Moving the old directory aside first is the safer order. That step, and the way step 3 saves the previous manifest's path, were not run verbatim.
 
 ---
 
@@ -523,10 +537,10 @@ Your per-user desktop entry in `~/.local/share/applications` still reflects an o
 
 ### `.mcpb`, `.dxt` or `.skill` files do not open in Claude Desktop
 
-The MIME registration in Step 8 was skipped or failed. Re-run the `install` and `update-mime-database` commands from that step, then check the association:
+The MIME registration in Step 8 was skipped or failed. Re-run the `install` and `update-mime-database` commands from that step, then check the association against a real file you have downloaded:
 
 ```bash
-xdg-mime query filetype some-extension.mcpb
+xdg-mime query filetype ~/Downloads/your-extension.mcpb
 ```
 
 ### `Permission denied` when reading files under `/usr/lib/claude-desktop`
@@ -695,14 +709,14 @@ claude-desktop-fedora-kde/
 |---|---|
 | [Claude Desktop on Linux (beta)](https://code.claude.com/docs/en/desktop-linux), Anthropic | Supported distributions, signing key fingerprint, package pool lookup, Cowork requirements, keyring troubleshooting and the Linux feature gaps |
 | [Claude Code setup: Linux package managers](https://code.claude.com/docs/en/setup#install-with-linux-package-managers), Anthropic | The CLI's signed apt, dnf and apk repositories |
-| [Download Claude](https://claude.ai/download), Anthropic | Platform availability and plan requirements |
+| [Download Claude](https://claude.com/download), Anthropic | Platform availability and plan requirements |
 | [What's new in Fedora KDE Plasma Desktop 45](https://fedoramagazine.org/whats-new-in-fedora-kde-plasma-desktop-45/), Fedora Magazine | Plasma 6.8 as the desktop of Fedora 45 KDE |
-| [Fedora Linux 45 officially released](https://linuxiac.com/?p=222316), Linuxiac | Plasma 6.8.2 on Fedora 45 and the retirement of the X11 session |
+| [Fedora Linux 45 officially released](https://linuxiac.com/fedora-45-officially-released/), Linuxiac | Plasma 6.8.2 on Fedora 45 and the retirement of the X11 session |
 | [Fedora 45 now available](https://www.linux-magazine.com/Online/News/Fedora-45-Now-Available), Linux Magazine | Release contents, including the 7.2 kernel series |
 | [EX-11: Prepping for Plasma's last X11-supported release](https://blog.davidedmundson.co.uk/blog/596/), David Edmundson, KDE | Removal of the Plasma X11 session in 6.8, with X11 applications continuing through XWayland |
 | [T7265: `--keyring` ignored with `use-keyboxd`](https://dev.gnupg.org/T7265), GnuPG | Why `--keyring` no longer isolates keys, and the separate home directory alternative |
 | [claude-desktop-debian](https://github.com/aaddrick/claude-desktop-debian), community project | RPM, AppImage and Nix repackaging of the official Linux app |
-| [claude-desktop-debian v3.0.0 release notes](https://newreleases.io/project/github/aaddrick/claude-desktop-debian/release/v3.0.0%2Bclaude1.18286.0) | The rebase onto Anthropic's Linux app, the `claude-desktop-unofficial` name and the firmware compatibility link |
+| [claude-desktop-debian v3.0.0 release notes](https://github.com/aaddrick/claude-desktop-debian/releases/tag/v3.0.0%2Bclaude1.18286.0) | The rebase onto Anthropic's Linux app, the `claude-desktop-unofficial` name and the firmware compatibility link |
 
 Observations attributed to the test machine come from commands run on it on 14 November 2026 and are recorded in [Validated configuration](#-validated-configuration).
 
